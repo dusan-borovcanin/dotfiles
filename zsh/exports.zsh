@@ -11,10 +11,13 @@ export LANG=en_US.UTF-8
 
 # Golang environment
 export GOPATH=$HOME/go
+export GOCACHE='off'
+
+# Color setup
+export TERM="xterm-256color"
 
 # libraries
 if [[ $(uname) = 'Linux' ]]; then
     export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 fi
-
 export PATH=/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$PATH
