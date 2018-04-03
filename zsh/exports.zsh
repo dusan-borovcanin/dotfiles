@@ -21,3 +21,7 @@ if [[ $(uname) = 'Linux' ]]; then
     export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 fi
 export PATH=/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$PATH
+
+#MAINFLUX ENV
+export MF_HTTP_ADAPTER_PORT="8000"
+export MF_NORMALIZER_PORT="8900"
