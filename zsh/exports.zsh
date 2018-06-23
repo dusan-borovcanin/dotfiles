@@ -9,9 +9,10 @@ export LC_COLLATE=C
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# Golang environment
+# Go environment
 export GOPATH=$HOME/go
 export GOCACHE='off'
+export GOBIN=$GOPATH/bin
 
 # Color setup
 export TERM="xterm-256color"
@@ -24,4 +25,14 @@ export PATH=/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$PATH
 
 #MAINFLUX ENV
 export MF_HTTP_ADAPTER_PORT="8000"
-export MF_NORMALIZER_PORT="8900"
+export MF_NORMALIZER_PORT="8089"
+export MF_USERS_HTTP_PORT="8180"
+export MF_USERS_GRPC_PORT="8181"
+export MF_THINGS_HTTP_PORT="8182"
+export MF_THINGS_GRPC_PORT="8183"
+export MF_INFLUX_WRITER_PORT="8900"
+export MF_THINGS_URL="localhost:8183"
+export MF_THINGS_SECRET="maneger"
+export MF_USERS_URL="localhost:8181"
+export MF_USERS_SECRET="manager"
+export MF_MONGO_WRITER_PORT="8555"

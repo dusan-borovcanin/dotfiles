@@ -64,3 +64,6 @@ alias gmt='git mergetool'
 
 # terminal
 alias terminal="gnome-terminal"
+
+# terminal youtube
+alias yt="mpsyt"
