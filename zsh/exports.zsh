@@ -1,8 +1,8 @@
 # set editor and pager
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
-# export VISUAL=vim
-# export EDITOR=vim
+export VISUAL=vim
+export EDITOR=vim
 
 # CTAGS Sorting in VIM/Emacs is better behaved with this in place
 export LC_COLLATE=C
