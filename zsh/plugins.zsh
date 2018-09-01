@@ -5,3 +5,10 @@ source <(kubectl completion zsh)
 
 #Autosuggestion color
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+
+#Theme colors
+export BULLETTRAIN_GO_PREFIX='\ue626'
+export BULLETTRAIN_GIT_COLORIZE_DIRTY=true
+export BULLETTRAIN_TIME_BG='black'
+export BULLETTRAIN_TIME_FG='white'
+
