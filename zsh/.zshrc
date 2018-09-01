@@ -6,6 +6,4 @@ source ~/dotfiles/zsh/aliases.zsh
 source ~/dotfiles/zsh/bindings.zsh
 source ~/dotfiles/zsh/history.zsh
 source ~/dotfiles/zsh/theme.zsh
-source ~/dotfiles/powerlevel9k/powerlevel9k.zsh-theme
-source <(kubectl completion zsh)
 source ~/dotfiles/zsh/plugins.zsh
