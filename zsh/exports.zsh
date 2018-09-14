@@ -4,6 +4,9 @@ export PAGER='less'
 export VISUAL=vim
 export EDITOR=vim
 
+# dir stack size
+export DIRSTACKSIZE=7
+
 # CTAGS Sorting in VIM/Emacs is better behaved with this in place
 export LC_COLLATE=C
 export LC_ALL=en_US.UTF-8

@@ -67,3 +67,6 @@ alias terminal="gnome-terminal"
 
 # terminal youtube
 alias yt="mpsyt"
+
+# list dir stack
+alias dh="dirs -v"

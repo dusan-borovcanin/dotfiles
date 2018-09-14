@@ -76,3 +76,5 @@ setopt transient_rprompt
 # perform implicit tees or cats when multiple redirections are attempted
 setopt multios
 
+# auto push directories to the directories stack
+setopt autopushd pushdminus pushdsilent pushdtohome
