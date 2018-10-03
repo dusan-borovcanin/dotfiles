@@ -17,7 +17,7 @@ export GOPATH=$HOME/go
 export GOCACHE='off'
 export GOBIN=$GOPATH/bin
 
-#ZSH config
+# ZSH config
 export ZSH_CUSTOM=$HOME/dotfiles
 
 # Color setup
@@ -29,7 +29,7 @@ if [[ $(uname) = 'Linux' ]]; then
 fi
 export PATH=/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$PATH
 
-#MAINFLUX ENV
+# MAINFLUX ENV
 export MF_HTTP_ADAPTER_PORT='8000'
 export MF_NORMALIZER_PORT='8089'
 export MF_USERS_HTTP_PORT='8180'
@@ -43,7 +43,22 @@ export MF_USERS_URL='localhost:8181'
 export MF_USERS_SECRET='manager'
 export MF_MONGO_WRITER_PORT='8555'
 
-#MONETASA ENV
+# MAINFLUX LOGGING
+export MF_HTTP_ADAPTER_LOG_LEVEL='info'
+export MF_MQTT_ADAPTER_LOG_LEVEL='info'
+export MF_WS_ADAPTER_LOG_LEVEL='info'
+export MF_COAP_ADAPTER_LOG_LEVEL='info'
+export MF_USERS_LOG_LEVEL='info'
+export MF_NORMALIZER_LOG_LEVEL='info'
+export MF_THINGS_LOG_LEVEL='info'
+export MF_INFLUX_WRITER_LOG_LEVEL='info'
+export MF_INFLUX_READER_LOG_LEVEL='info'
+export MF_CASSANDRA_WRITER_LOG_LEVEL='info'
+export MF_CASSANDRA_READER_LOG_LEVEL='info'
+export MF_MONGO_WRITER_LOG_LEVEL='info'
+export MF_MONGO_READER_LOG_LEVEL='info'
+
+# MONETASA ENV
 export MONETASA_AUTH_URL='localhost:8081'
 export MONETASA_TRANSACTIONS_HTTP_PORT='8082'
 export MONETASA_TRANSACTIONS_GRPC_PORT='8083'
@@ -52,3 +67,5 @@ export MONETASA_STREAMS_GRPC_PORT='8085'
 export MONETASA_SUBSCRIPTIONS_PORT='8086'
 export MONETASA_STREAMS_URL='localhost:8085'
 export MONETASA_TRANSACTIONS_URL='localhost:8083'
+
+export GOOGLE_APPLICATION_CREDENTIALS="$GOPATH/src/monetasa/config/big-query/DigiSense-1987a4981f2e.json"
