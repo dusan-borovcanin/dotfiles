@@ -1,6 +1,10 @@
 
-# substitute vi with vim
+# substitute Vi with Vim
 alias vi=vim
+
+# Emacs client
+alias ec='emacsclient'
+
 # -------------------------------------------------------------------
 # directory movement
 # -------------------------------------------------------------------
