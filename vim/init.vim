@@ -142,3 +142,7 @@ autocmd FileType go nmap <buffer> <leader>e <plug>(go-rename)
 autocmd FileType go nmap <buffer> gd <plug>(go-def-vertical)
 autocmd FileType go nmap <buffer> <c-]> <plug>(go-def-vertical)
 autocmd FileType go nmap <buffer> <leader>i <plug>(go-info)
+
+" tree mappings
+map <silent> <C-t> :NERDTreeToggle<CR>
+
