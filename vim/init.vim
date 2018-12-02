@@ -1,6 +1,3 @@
-"" Vim-PLug core
-"*****************************************************************************
-
 " nocompatible
 set nocompatible
 
@@ -35,10 +32,11 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
-Plug 'vim-ctrlspace/vim-ctrlspace'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'junegunn/fzf'
+Plug 'w0rp/ale'
+
 call plug#end()
 
 " install missing plugins on start
@@ -102,8 +100,6 @@ let g:go_def_mapping_enabled = 0
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
 let g:go_term_enabled = 1
-let g:syntastic_go_checkers = ['golint', 'govet']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -123,6 +119,10 @@ let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_yaml_frontmatter = 1
 
+" ale                                                                                                                                                                               
+let g:ale_sign_error='✗'                                                                                                                                                          
+let g:ale_sign_warning='⚠'                                                                                                                                                        
+let g:airline#extensions#ale#enabled = 1
 
 " vim-airline
 let g:airline_theme='tomorrow'
