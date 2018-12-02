@@ -12,6 +12,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
+Plug 'cespare/vim-toml'
+Plug 'elzr/vim-json'
 
 call plug#end()
 
