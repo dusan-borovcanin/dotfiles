@@ -1,8 +1,8 @@
 " nocompatible
 set nocompatible
 
-" map spellcheck
-map <F8> :setlocal spell! spelllang=en_us<CR>
+" set spellcheck
+set spell
 
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
@@ -54,6 +54,9 @@ set binary
 
 " fix backspace indent
 set backspace=indent,eol,start
+
+" complete preview
+set completeopt-=preview
 
 " tabs
 set tabstop=4
@@ -120,9 +123,12 @@ let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_yaml_frontmatter = 1
 
 " ale                                                                                                                                                                               
-let g:ale_sign_error='✗'                                                                                                                                                          
-let g:ale_sign_warning='⚠'                                                                                                                                                        
+let g:ale_sign_error = '✗'                                                                                                                                                          
+let g:ale_sign_warning = '⚠'                                                                                                                                                        
 let g:airline#extensions#ale#enabled = 1
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+let g:ale_lint_delay = 100
 
 " vim-airline
 let g:airline_theme='tomorrow'
