@@ -89,6 +89,12 @@ let g:go_highlight_array_whitespace_error = 0
 let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_extra_types = 1
 
+" markdown
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_yaml_frontmatter = 1
+
+
 " vim-airline
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
@@ -131,7 +137,6 @@ else
   let g:airline_symbols.linenr = ''
 endif
 
-
 colorscheme Atelier_LakesideDark
 
 " vim-go mappings
@@ -145,4 +150,3 @@ autocmd FileType go nmap <buffer> <leader>i <plug>(go-info)
 
 " tree mappings
 map <silent> <C-t> :NERDTreeToggle<CR>
-
