@@ -1,10 +1,32 @@
-"" Encoding
+" plugins
+call plug#begin()
+
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'Valloric/YouCompleteMe'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'flazz/vim-colorschemes'
+
+call plug#end()
+
+" install missing plugins on start
+autocmd VimEnter *
+  \  if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall
+  \| endif
+
+" encoding
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
 set bomb
 set binary
-
 
 " fix backspace indent
 set backspace=indent,eol,start
@@ -68,7 +90,7 @@ let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_extra_types = 1
 
 " vim-airline
-let g:airline_theme='simple'
+let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
 
 " enable autocompletion
@@ -109,33 +131,8 @@ else
   let g:airline_symbols.linenr = ''
 endif
 
-" plugins
-call plug#begin()
 
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" add plugins to &runtimepath
-call plug#end()
-
-" install missing plugins on start
-autocmd VimEnter *
-  \  if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
-  \|   PlugInstall
-  \| endif
-
-" deoplete
-imap <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
-imap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
-imap <expr> <cr>    pumvisible() ? deoplete#close_popup() : "\<cr>"
+colorscheme Atelier_LakesideDark
 
 " vim-go mappings
 autocmd FileType go nmap <buffer> <leader>r <plug>(go-run)
