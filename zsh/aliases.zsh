@@ -1,6 +1,6 @@
 
-# substitute Vi with Vim
-alias vi=vim
+# substitute Vim with NeoVim
+alias vim=nvim
 
 # Emacs client
 alias ec='emacsclient'

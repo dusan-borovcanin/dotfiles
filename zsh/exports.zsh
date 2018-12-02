@@ -1,8 +1,9 @@
 # set editor and pager
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
-export VISUAL=vim
-export EDITOR=vim
+export VISUAL=nvim
+export EDITOR=$VISUAL
+export GIT_EDITOR=nvim
 
 # dir stack size
 export DIRSTACKSIZE=7
@@ -44,6 +45,7 @@ export MF_USERS_SECRET='manager'
 export MF_MONGO_WRITER_PORT='8555'
 export MF_CASSANDRA_WRITER_PORT='8902'
 export MF_CASSANDRA_READER_PORT='8903'
+export MF_BOOTSTRAP_PORT='8904'
 
 # MAINFLUX LOGGING
 export MF_HTTP_ADAPTER_LOG_LEVEL='info'
@@ -59,6 +61,7 @@ export MF_CASSANDRA_WRITER_LOG_LEVEL='info'
 export MF_CASSANDRA_READER_LOG_LEVEL='info'
 export MF_MONGO_WRITER_LOG_LEVEL='info'
 export MF_MONGO_READER_LOG_LEVEL='info'
+export MF_BOOTSTRAP_LOG_LEVEL='info'
 
 # MONETASA ENV
 export MONETASA_AUTH_URL='localhost:8081'
