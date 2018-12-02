@@ -1,9 +1,32 @@
+"" Vim-PLug core
+"*****************************************************************************
+
+" nocompatible
+set nocompatible
+
+" map spellcheck
+map <F8> :setlocal spell! spelllang=en_us<CR>
+
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+
+if !filereadable(vimplug_exists)
+  if !executable("curl")
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent !\curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+
 " plugins
-call plug#begin()
+call plug#begin(expand('~/.config/nvim/plugged'))
 
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'Valloric/YouCompleteMe'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'cespare/vim-toml'
+Plug 'elzr/vim-json'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -12,9 +35,10 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
-Plug 'cespare/vim-toml'
-Plug 'elzr/vim-json'
-
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 call plug#end()
 
 " install missing plugins on start
@@ -53,6 +77,9 @@ set nobackup
 set noswapfile
 
 set fileformats=unix,dos,mac
+
+" ctrlspace
+let g:CtrlSpaceDefaultMappingKey = "<C-space> "
 
 if exists('$SHELL')
     set shell=$SHELL
