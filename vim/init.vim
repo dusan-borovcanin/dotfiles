@@ -1,9 +1,6 @@
 " nocompatible
 set nocompatible
 
-" set spellcheck
-set spell
-
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
 if !filereadable(vimplug_exists)
@@ -79,8 +76,12 @@ set noswapfile
 
 set fileformats=unix,dos,mac
 
-" ctrlspace
-let g:CtrlSpaceDefaultMappingKey = "<C-space> "
+" splits settings
+set splitbelow splitright
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 if exists('$SHELL')
     set shell=$SHELL
@@ -122,9 +123,9 @@ let g:vim_markdown_json_frontmatter = 1
 let g:vim_markdown_toml_frontmatter = 1
 let g:vim_markdown_yaml_frontmatter = 1
 
-" ale                                                                                                                                                                               
-let g:ale_sign_error = '✗'                                                                                                                                                          
-let g:ale_sign_warning = '⚠'                                                                                                                                                        
+" ale
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
 let g:airline#extensions#ale#enabled = 1
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
