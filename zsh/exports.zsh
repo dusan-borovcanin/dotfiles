@@ -22,7 +22,7 @@ export GOBIN=$GOPATH/bin
 export ZSH_CUSTOM=$HOME/dotfiles
 
 # Color setup
-export TERM='xterm-256color'
+export TERM='rxvt-unicode-256color'
 
 # libraries
 if [[ $(uname) = 'Linux' ]]; then

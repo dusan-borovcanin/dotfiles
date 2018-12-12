@@ -5,6 +5,13 @@ alias vim=nvim
 # Emacs client
 alias ec='emacsclient'
 
+# Tmux aliases
+alias tma='tmux attach -t'
+alias tmd='tmux detach-client'
+alias tmlw='tmux list-windows'
+alias tmls='tmux list-sessions'
+
+
 # -------------------------------------------------------------------
 # directory movement
 # -------------------------------------------------------------------
