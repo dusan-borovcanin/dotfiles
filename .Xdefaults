@@ -1,4 +1,4 @@
-URxvt*background:                     #151718
+URxvt*background:                     [90]#151718
 URxvt*foreground:                     #f2f2f2
 URxvt*cursorColor:                    #f2f2f2
 
@@ -48,3 +48,4 @@ URxvt.urgentOnBell: true
 URxvt.scrollBar: false
 URxvt.letterSpace: 0
 URxvt.font: xft:hack:size=12, xft:DejaVu Sans:size=12, xft:Inconsolata Nerd Font Mono:size=12
+URxvt.depth: 32
