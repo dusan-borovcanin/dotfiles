@@ -43,8 +43,16 @@ URxvt*color19:                        #3B758C
 URxvt*color20:                        #43a5d5
 URxvt*color21:                        #eeeeee
 
+! plugins
+URxvt.perl-ext-common: default,matcher,resize-font,fullscreen
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.keysym.F11: perl:fullscreen:switch
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
 URxvt.urgentOnBell: true
 URxvt.scrollBar: false
 URxvt.letterSpace: 0
-URxvt.font: xft:hack:size=12, xft:DejaVu Sans:size=12, xft:Inconsolata Nerd Font Mono:size=12
+URxvt.font: xft:DejaVu Sans Mono for Powerline:size=12, xft:hack:size=12, xft:DejaVu Sans:size=12
 URxvt.depth: 32
