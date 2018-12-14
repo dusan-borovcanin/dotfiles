@@ -54,5 +54,5 @@ URxvt.iso14755_52: false
 URxvt.urgentOnBell: true
 URxvt.scrollBar: false
 URxvt.letterSpace: 0
-URxvt.font: xft:DejaVu Sans Mono for Powerline:size=12, xft:hack:size=12, xft:DejaVu Sans:size=12
+URxvt.font: xft:DejaVu Sans Mono Nerd Font:size=12, xft:hack:size=12, xft:DejaVu Sans:size=12
 URxvt.depth: 32
