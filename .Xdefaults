@@ -51,8 +51,15 @@ URxvt.keysym.F11: perl:fullscreen:switch
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 
+! settings
 URxvt.urgentOnBell: true
 URxvt.scrollBar: false
 URxvt.letterSpace: 0
 URxvt.font: xft:DejaVu Sans Mono Nerd Font:size=12, xft:hack:size=12, xft:DejaVu Sans:size=12
 URxvt.depth: 32
+
+!bindings for Ctrl-Arrow jumps
+URxvt.keysym.Control-Up:     \033[1;5A
+URxvt.keysym.Control-Down:   \033[1;5B
+URxvt.keysym.Control-Left:   \033[1;5D
+URxvt.keysym.Control-Right:  \033[1;5C
