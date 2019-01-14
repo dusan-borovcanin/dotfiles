@@ -12,6 +12,8 @@ alias tmlw='tmux list-windows'
 alias tmls='tmux list-sessions'
 alias tmd='tmux detach-client'
 alias tmk='tmux kill-session -t'
+alias tmnw='tmux new-window'
+alias tmkw='tmux kill-window'
 
 # -------------------------------------------------------------------
 # directory movement
