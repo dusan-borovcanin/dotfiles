@@ -1,7 +1,6 @@
 # set editor and pager
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
-export VISUAL=nvim
 export EDITOR=$VISUAL
 export GIT_EDITOR=nvim
 
