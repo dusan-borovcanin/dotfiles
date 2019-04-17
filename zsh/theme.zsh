@@ -100,10 +100,7 @@ if [ ! -n "${BULLETTRAIN_PROMPT_ORDER+1}" ]; then
     time
     status
     dir
-    screen
-    virtualenv
     go
-    elixir
     git
     cmd_exec_time
   )
@@ -165,28 +162,6 @@ if [ ! -n "${BULLETTRAIN_GO_FG+1}" ]; then
 fi
 if [ ! -n "${BULLETTRAIN_GO_PREFIX+1}" ]; then
   BULLETTRAIN_GO_PREFIX="go"
-fi
-
-# Kubernetes Context
-if [ ! -n "${BULLETTRAIN_KCTX_BG+1}" ]; then
-  BULLETTRAIN_KCTX_BG=yellow
-fi
-if [ ! -n "${BULLETTRAIN_KCTX_FG+1}" ]; then
-  BULLETTRAIN_KCTX_FG=white
-fi
-if [ ! -n "${BULLETTRAIN_KCTX_PREFIX+1}" ]; then
-  BULLETTRAIN_KCTX_PREFIX="⎈"
-fi
-
-# ELIXIR
-if [ ! -n "${BULLETTRAIN_ELIXIR_BG+1}" ]; then
-  BULLETTRAIN_ELIXIR_BG=magenta
-fi
-if [ ! -n "${BULLETTRAIN_ELIXIR_FG+1}" ]; then
-  BULLETTRAIN_ELIXIR_FG=white
-fi
-if [ ! -n "${BULLETTRAIN_ELIXIR_PREFIX+1}" ]; then
-  BULLETTRAIN_ELIXIR_PREFIX="💧"
 fi
 
 # DIR
@@ -302,17 +277,6 @@ if [ ! -n "${BULLETTRAIN_GIT_DIVERGED+1}" ]; then
   ZSH_THEME_GIT_PROMPT_DIVERGED=" ⬍"
 else
   ZSH_THEME_GIT_PROMPT_DIVERGED=$BULLETTRAIN_GIT_PROMPT_DIVERGED
-fi
-
-# SCREEN
-if [ ! -n "${BULLETTRAIN_SCREEN_BG+1}" ]; then
-  BULLETTRAIN_SCREEN_BG=white
-fi
-if [ ! -n "${BULLETTRAIN_SCREEN_FG+1}" ]; then
-  BULLETTRAIN_SCREEN_FG=black
-fi
-if [ ! -n "${BULLETTRAIN_SCREEN_PREFIX+1}" ]; then
-  BULLETTRAIN_SCREEN_PREFIX="⬗"
 fi
 
 # COMMAND EXECUTION TIME
@@ -452,13 +416,6 @@ prompt_dir() {
   prompt_segment $BULLETTRAIN_DIR_BG $BULLETTRAIN_DIR_FG $dir
 }
 
-# ELIXIR
-prompt_elixir() {
-  if command -v elixir > /dev/null 2>&1; then
-    prompt_segment $BULLETTRAIN_ELIXIR_BG $BULLETTRAIN_ELIXIR_FG $BULLETTRAIN_ELIXIR_PREFIX" $(elixir -v | tail -n 1 | awk '{print $2}')"
-  fi
-}
-
 # Go
 prompt_go() {
   setopt extended_glob
@@ -466,36 +423,6 @@ prompt_go() {
     if command -v go > /dev/null 2>&1; then
       prompt_segment $BULLETTRAIN_GO_BG $BULLETTRAIN_GO_FG $BULLETTRAIN_GO_PREFIX
     fi
-  fi
-}
-
-# Kubernetes Context
-prompt_kctx() {
-  if [[ ! -n $BULLETTRAIN_KCTX_KCONFIG ]]; then
-    return
-  fi
-  if command -v kubectl > /dev/null 2>&1; then
-    if [[ -f $BULLETTRAIN_KCTX_KCONFIG ]]; then
-      prompt_segment $BULLETTRAIN_KCTX_BG $BULLETTRAIN_KCTX_FG $BULLETTRAIN_KCTX_PREFIX" $(cat $BULLETTRAIN_KCTX_KCONFIG|grep current-context| awk '{print $2}')"
-    fi
-  fi
-}
-
-# Virtualenv: current working virtualenv
-prompt_virtualenv() {
-  local virtualenv_path="$VIRTUAL_ENV"
-  if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment $BULLETTRAIN_VIRTUALENV_BG $BULLETTRAIN_VIRTUALENV_FG $BULLETTRAIN_VIRTUALENV_PREFIX" $(basename $virtualenv_path)"
-  elif which pyenv &> /dev/null; then
-    prompt_segment $BULLETTRAIN_VIRTUALENV_BG $BULLETTRAIN_VIRTUALENV_FG $BULLETTRAIN_VIRTUALENV_PREFIX" $(pyenv version | sed -e 's/ (set.*$//' | tr '\n' ' ' | sed 's/.$//')"
-  fi
-}
-
-# SCREEN Session
-prompt_screen() {
-  local session_name="$STY"
-  if [[ "$session_name" != "" ]]; then
-    prompt_segment $BULLETTRAIN_SCREEN_BG $BULLETTRAIN_SCREEN_FG $BULLETTRAIN_SCREEN_PREFIX" $session_name"
   fi
 }
 
