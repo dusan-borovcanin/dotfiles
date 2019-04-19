@@ -1,6 +1,6 @@
 URxvt*background:                     [90]#151718
 URxvt*foreground:                     #f2f2f2
-URxvt*cursorColor:                    #f2f2f2
+URxvt*cursorColor:                    #268BD2
 
 URxvt*scrollColor:                    #f2f2f2
 URxvt*highlightColor:                 #3B758C
