@@ -13,8 +13,6 @@
 # The default configuration, that can be overwrite in your .zshrc file
 # ------------------------------------------------------------------------------
 
-VIRTUAL_ENV_DISABLE_PROMPT=true
-
 # Get the status of the working tree
 function git_prompt_status() {
   local INDEX STATUS
@@ -94,18 +92,6 @@ function parse_git_dirty() {
   fi
 }
 
-# Define order and content of prompt
-if [ ! -n "${BULLETTRAIN_PROMPT_ORDER+1}" ]; then
-  BULLETTRAIN_PROMPT_ORDER=(
-    time
-    status
-    dir
-    go
-    git
-    cmd_exec_time
-  )
-fi
-
 # PROMPT
 if [ ! -n "${BULLETTRAIN_PROMPT_CHAR+1}" ]; then
   BULLETTRAIN_PROMPT_CHAR="\$"
@@ -140,17 +126,6 @@ if [ ! -n "${BULLETTRAIN_TIME_BG+1}" ]; then
 fi
 if [ ! -n "${BULLETTRAIN_TIME_FG+1}" ]; then
   BULLETTRAIN_TIME_FG=black
-fi
-
-# Go
-if [ ! -n "${BULLETTRAIN_GO_BG+1}" ]; then
-  BULLETTRAIN_GO_BG=cyan
-fi
-if [ ! -n "${BULLETTRAIN_GO_FG+1}" ]; then
-  BULLETTRAIN_GO_FG=white
-fi
-if [ ! -n "${BULLETTRAIN_GO_PREFIX+1}" ]; then
-  BULLETTRAIN_GO_PREFIX="go"
 fi
 
 # DIR
@@ -363,8 +338,6 @@ prompt_cmd_exec_time() {
 # Git
 prompt_git() {
   local ref dirty mode repo_path git_prompt
-  repo_path=$(git rev-parse --git-dir 2>/dev/null)
-
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
     if [[ $BULLETTRAIN_GIT_COLORIZE_DIRTY == true && -n $(git status --porcelain --ignore-submodules) ]]; then
       BULLETTRAIN_GIT_BG=$BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR
@@ -401,16 +374,6 @@ prompt_dir() {
   prompt_segment $BULLETTRAIN_DIR_BG $BULLETTRAIN_DIR_FG $dir
 }
 
-# Go
-prompt_go() {
-  setopt extended_glob
-  if [[ -n *.go(#qN) ]]; then
-    if command -v go > /dev/null 2>&1; then
-      prompt_segment $BULLETTRAIN_GO_BG $BULLETTRAIN_GO_FG $BULLETTRAIN_GO_PREFIX
-    fi
-  fi
-}
-
 prompt_time() {
   if [[ $BULLETTRAIN_TIME_12HR == true ]]; then
     prompt_segment $BULLETTRAIN_TIME_BG $BULLETTRAIN_TIME_FG %D{%r}
@@ -436,7 +399,6 @@ prompt_status() {
   elif [[ -n "$symbols" ]]; then
     prompt_segment $BULLETTRAIN_STATUS_BG $BULLETTRAIN_STATUS_FG "$symbols"
   fi
-
 }
 
 # Prompt Character
@@ -458,25 +420,17 @@ prompt_chars() {
   fi
 }
 
-# Prompt Line Separator
-prompt_line_sep() {
-  if [[ $BULLETTRAIN_PROMPT_SEPARATE_LINE == true ]]; then
-    # newline wont print without a non newline character, so add a zero-width space
-    echo -e '\n%{\u200B%}'
-  fi
-}
-
 # ------------------------------------------------------------------------------
 # MAIN
 # Entry point
 # ------------------------------------------------------------------------------
-
 build_prompt() {
   RETVAL=$?
-  for segment in $BULLETTRAIN_PROMPT_ORDER
-  do
-    prompt_$segment
-  done
+  prompt_time
+  prompt_status
+  prompt_dir
+  prompt_git
+  prompt_cmd_exec_time
   prompt_end
 }
 
