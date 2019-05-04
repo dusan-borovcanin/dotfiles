@@ -86,9 +86,11 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
+# set $ws1 "1"
+set $ws1 "1 "
+set $ws2 "2 "
+set $ws3 "3 "
+# set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -96,6 +98,8 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -134,9 +138,12 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 10
 bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 10
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease sound volume
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
+bindsym XF86AudioMute exec --no-startup-id amixer Master set toggle
 
 # Defining colors
 
@@ -146,7 +153,7 @@ set $silver0 #e4e4e4
 set $orange  #ff8700
 
 # RGBA
-set $cyan	   #4ec2f799
+set $cyan	 #4ec2f799
 set $acqua	 #00708999
 set $wine 	 #72003e99
 set $magenta #af005f99
@@ -243,24 +250,27 @@ smart_gaps on
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-    status_command i3blocks -c ~/.config/i3/.i3blocks.conf
-    position top
-    i3bar_command i3bar -t
-    font pango: SauceCodePro Nerd Font Black 10
+# bar {
+#        status_command i3blocks -c ~/.config/i3/.i3blocks.conf
+#        position top
+#        i3bar_command i3bar -t
+#        font pango: SauceCodePro Nerd Font Black 10
+#        colors {
+#                                # Border  # Background  # Text
+#		    focused_workspace   $silver0  $silver0      $elegant
+#		    active_workspace    $elegant  $elegant      $orange
+#		    inactive_workspace  $elegant  $elegant 	    $cyan0
+#		    urgent_workspace    $acqua    $acqua        $silver0
+#		    background          $elegant
+#    }
+#}
 
-    colors {
-                            # Border  # Background  # Text
-		focused_workspace   $silver0  $silver0      $elegant
-		active_workspace    $elegant  $elegant      $orange
-		inactive_workspace  $elegant  $elegant 	    $cyan0
-		urgent_workspace    $acqua    $acqua        $silver0
-		background          $elegant
-    }
-}
+assign [class="Slack"] $ws1
+assign [class="Code"] $ws2
+assign [class="Google-chrome"] $ws3
 
-assign [class="google-chrome"] $ws3
 exec_always feh --bg-scale ~/Downloads/wp.jpg # Set background
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec xrandr --output $monitor2 --auto --left-of $monitor1 # Setup monitors
 exec --no-startup-id dunst # Start notification daemon
 exec compton # Composer for transparency
