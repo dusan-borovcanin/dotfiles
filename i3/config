@@ -1,4 +1,4 @@
-#  _ _____                    __ _
+#  t _____                    __ _
 # (_)___ /    ___ ___  _ __  / _(_) __ _
 # | | |_ \   / __/ _ \| '_ \| |_| |/ _` |
 # | |___) | | (_| (_) | | | |  _| | (_| |
@@ -220,7 +220,7 @@ mode "move_workspace" {
 
 bindsym $mod+o mode "move_workspace"
 exec_always setxkbmap -layout us,rs -variant ,qwerty
-exec_alway setxkbmap -option 'grp:ctrl_alt_toggle'
+exec_always setxkbmap -option 'grp:ctrl_alt_toggle'
 # exec_always "setxkbmap -option 'grp:alt_shift_toggle' -layout us,rs1 -variant ,qwerty"
 
 # RGB
