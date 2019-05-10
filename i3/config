@@ -1,4 +1,4 @@
-#  t _____                    __ _
+#   _____                    __ _
 # (_)___ /    ___ ___  _ __  / _(_) __ _
 # | | |_ \   / __/ _ \| '_ \| |_| |/ _` |
 # | |___) | | (_| (_) | | | |  _| | (_| |
@@ -32,7 +32,7 @@ bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec rofi -show drun -columns 3
+bindsym $mod+d exec rofi -lines 12 -padding 18 -location 0 -show drun -sidebar-mode -columns 3
 
 # change focus
 bindsym $mod+j focus left
@@ -247,7 +247,6 @@ client.placeholder          $magenta $magenta   $silver  $magenta
 
 gaps inner 7
 smart_gaps on
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 # bar {
@@ -264,7 +263,6 @@ smart_gaps on
 #		    background          $elegant
 #    }
 #}
-
 assign [class="Slack"] $ws1
 assign [class="Code"] $ws2
 assign [class="Google-chrome"] $ws3
