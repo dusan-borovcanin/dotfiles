@@ -5,9 +5,9 @@
 
 PDIR="$HOME/.config/polybar"
 LAUNCH="polybar-msg cmd restart"
-START=155
-START_NEW=154
-END=215
+START=151
+START_NEW=150
+END=211
 
 if  [[ $1 = "-type-1" ]]; then
 # Copying The File
