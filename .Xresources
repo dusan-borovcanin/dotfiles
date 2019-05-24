@@ -1,4 +1,4 @@
-URxvt*background:                     [90]#151718
+URxvt*background:                     [90]#000000
 URxvt*foreground:                     #f2f2f2
 URxvt*cursorColor:                    #43a5d5
 
@@ -55,7 +55,7 @@ URxvt.iso14755_52: false
 URxvt.urgentOnBell: true
 URxvt.scrollBar: false
 URxvt.letterSpace: 0
-URxvt.font: xft:DejaVu Sans Mono Nerd Font:size=12, xft:hack:size=12, xft:DejaVu Sans:size=12
+URxvt.font: xft:Source Code Pro:style=Semibold:size=12, xft:DejaVu Sans Mono Nerd Font:size=12, xft:hack:size=12, xft:DejaVu Sans:size=12
 URxvt.depth: 32
 
 !bindings for arrow moves
