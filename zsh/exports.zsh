@@ -17,7 +17,7 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 
 # ZSH config
-export ZSH_CUSTOM=$HOME/dotfiles
+export DOTFILES=$HOME/dotfiles
 
 # Color setup
 export TERM='rxvt-unicode-256color'
