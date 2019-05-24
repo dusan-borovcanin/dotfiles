@@ -86,11 +86,9 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-# set $ws1 "1"
 set $ws1 "1 "
 set $ws2 "2 "
 set $ws3 "3 "
-# set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -148,21 +146,21 @@ bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 # Defining colors
 
 # RGB
-set $cyan0	 #4ec2f7
+set $cyan0   #4ec2f7
 set $silver0 #e4e4e4
 set $orange  #ff8700
 
 # RGBA
-set $cyan	 #4ec2f799
-set $acqua	 #00708999
-set $wine 	 #72003e99
+set $cyan    #4ec2f799
+set $acqua   #00708999
+set $wine    #72003e99
 set $magenta #af005f99
 set $silver  #e4e4e499
 set $toxic   #8EC00099
 set $elegant #00002c30
 
-# Set some nice colors      border	 background text	   indicator
-client.focused              $cyan	   $cyan      $elegant $cyan
+# Set some nice colors      border   background text	 indicator
+client.focused              $cyan    $cyan      $elegant $cyan
 client.unfocused            $elegant $elegant   $cyan    $elegant
 client.focused_inactive     $acqua   $acqua     $silver  $acqua
 client.urgent               $magenta $magenta   $silver  $magenta
@@ -222,24 +220,25 @@ bindsym $mod+o mode "move_workspace"
 exec_always setxkbmap -layout us, rs -variant, qwerty
 exec_always setxkbmap -option 'grp:ctrl_alt_toggle'
 bindsym $mod+c exec --no-startup-id code ~/.config/i3/config
+bindsym $mod+p exec --no-startup-id code ~/.config/polybar/config.ini
 # exec_always "setxkbmap -option 'grp:alt_shift_toggle' -layout us,rs1 -variant ,qwerty"
 
 # RGB
-set $cyan0	 #4ec2f7
+set $cyan0   #4ec2f7
 set $silver0 #e4e4e4
 set $orange  #ff8700
 
 # RGBA
-set $cyan	 #4ec2f799
-set $acqua	 #00708999
-set $wine 	 #72003e99
+set $cyan    #4ec2f799
+set $acqua   #00708999
+set $wine    #72003e99
 set $magenta #af005f99
 set $silver  #e4e4e499
 set $toxic   #8EC00099
 set $elegant #00002c30
 
-# Set some nice colors      border	 background text	 indicator
-client.focused              $cyan	 $cyan      $elegant $cyan
+# Set some nice colors      border   background text	 indicator
+client.focused              $cyan    $cyan      $elegant $cyan
 client.unfocused            $elegant $elegant   $cyan    $elegant
 client.focused_inactive     $acqua   $acqua     $silver  $acqua
 client.urgent               $magenta $magenta   $silver  $magenta
@@ -270,21 +269,25 @@ mode "gaps_inner" {
 #        i3bar_command i3bar -t
 #        font pango: SauceCodePro Nerd Font Black 10
 #        colors {
-#                                # Border  # Background  # Text
+#                                       # Border  # Background  # Text
 # 		    focused_workspace   $silver0  $silver0      $elegant
 # 		    active_workspace    $elegant  $elegant      $orange
-# 		    inactive_workspace  $elegant  $elegant 	    $cyan0
+# 		    inactive_workspace  $elegant  $elegant 	$cyan0
 # 		    urgent_workspace    $acqua    $acqua        $silver0
 # 		    background          $elegant
 #    }
 # }
 assign [class="Slack"] $ws1
-assign [class="code-oss"] $ws2
+assign [class="Code"] $ws2
 assign [class="Google-chrome"] $ws3
+assign [class="postman"] $ws4
+assign [class="zoom"] $ws5
 
 exec_always feh --bg-scale $HOME/Downloads/wp.jpg # Set background
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec xrandr --output $monitor2 --auto --left-of $monitor1 # Setup monitors
+exec xrandr --output $monitor2 --mode 1920x1080 --left-of $monitor1 # Setup monitors
 exec_always --no-startup-id dunst -config $HOME/.config/i3/dunst/dunstrc # Start notification daemon
-exec compton # Composer for transparency
-exec --no-startup-id $HOME/dotfiles/i3/startup.sh # Startup programs
+exec --no-startup-id blueman-applet # Bluetooth applet
+exec --no-startup-id nm-applet # Applet for NetworkManager
+exec_always --no-startup-id compton #Composer for transparency
+exec --no-startup-id $HOME/dotfiles/config/i3/startup.sh # Startup programs
