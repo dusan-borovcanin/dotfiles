@@ -3,7 +3,7 @@
 ## Author : Aditya Shakya
 ## Github : adi1090x
 
-PDIR="$HOME/.config/polybar"
+PDIR="$HOME/dotfiles/config/polybar/polybar1"
 LAUNCH="polybar-msg cmd restart"
 START=151
 START_NEW=150
