@@ -11,9 +11,9 @@ font pango: SauceCodePro Nerd Font Black 11
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# Default borders: 2px for all the windows; no borders for fullscreen
-default_border pixel 2
-default_floating_border pixel 2
+# Default borders: 3px for all the windows; no borders for fullscreen
+default_border pixel 3
+default_floating_border pixel 3
 hide_edge_borders both
 
 # Default gaps
@@ -137,29 +137,6 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
 bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 
-# Defining colors
-
-# RGB
-set $cyan0   #4ec2f7
-set $silver0 #e4e4e4
-set $orange  #ff8700
-
-# RGBA
-set $cyan    #4ec2f799
-set $acqua   #00708999
-set $wine    #72003e99
-set $magenta #af005f99
-set $silver  #e4e4e499
-set $toxic   #8EC00099
-set $elegant #00002c30
-
-# Set some nice colors      border   background text	 indicator
-client.focused              $cyan    $cyan      $elegant $cyan
-client.unfocused            $elegant $elegant   $cyan    $elegant
-client.focused_inactive     $acqua   $acqua     $silver  $acqua
-client.urgent               $magenta $magenta   $silver  $magenta
-client.placeholder          $magenta $magenta   $silver  $magent
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -226,19 +203,23 @@ set $orange  #ff8700
 
 # RGBA
 set $cyan    #4ec2f799
-set $acqua   #00708999
+set $aqua   #00708999
 set $wine    #72003e99
 set $magenta #af005f99
 set $silver  #e4e4e499
 set $toxic   #8EC00099
 set $elegant #00002c30
 
-# Set some nice colors      border   background text	 indicator
-client.focused              $cyan    $cyan      $elegant $cyan
-client.unfocused            $elegant $elegant   $cyan    $elegant
-client.focused_inactive     $acqua   $acqua     $silver  $acqua
-client.urgent               $magenta $magenta   $silver  $magenta
-client.placeholder          $magenta $magenta   $silver  $magenta
+# Shades
+set $shade1 #004D40
+set $shade2 #00897B
+
+# Set some nice colors      border   background text	   indicator   child_border
+client.focused              $shade1  $shade1    $silver0   $shade1     $shade1
+client.unfocused            $shade1  $shade2    $silver0   $elegant    $shade1
+client.focused_inactive     $aqua    $aqua      $silver0   $aqua
+client.urgent               $magenta $magenta   $silver0   $magenta
+client.placeholder          $magenta $magenta   $silver0   $magenta
 
 bindsym $mod+Shift+g mode "gaps_inner"
 mode "gaps_inner" {
@@ -266,7 +247,7 @@ mode "gaps_inner" {
 # 		    focused_workspace   $silver0  $silver0      $elegant
 # 		    active_workspace    $elegant  $elegant      $orange
 # 		    inactive_workspace  $elegant  $elegant 	$cyan0
-# 		    urgent_workspace    $acqua    $acqua        $silver0
+# 		    urgent_workspace    $aqua     $aqua        $silver0
 # 		    background          $elegant
 #    }
 # }
