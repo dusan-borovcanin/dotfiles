@@ -17,7 +17,7 @@ default_floating_border pixel 2
 hide_edge_borders both
 
 # Default gaps
-gaps inner 7
+gaps inner 5
 smart_gaps on
 
 # start a terminal
@@ -210,7 +210,7 @@ mode "move_workspace" {
     bindsym Escape mode "default"
 }
 
-set $polybar_loc $HOME/dotfiles/config/polybar/polybar3
+set $polybar_loc $HOME/dotfiles/config/polybar/polybar2
 bindsym $mod+o mode "move_workspace"
 exec_always setxkbmap -layout us, rs -variant, qwerty
 exec_always setxkbmap -option 'grp:ctrl_alt_toggle'
