@@ -1,28 +1,24 @@
-#   _____                    __ _
-# (_)___ /    ___ ___  _ __  / _(_) __ _
-# | | |_ \   / __/ _ \| '_ \| |_| |/ _` |
-# | |___) | | (_| (_) | | | |  _| | (_| |
-# |_|____/   \___\___/|_| |_|_| |_|\__, |
-#                                  |___/
-
-# Default modkey
+# Windows is default modkey
 set $mod Mod4
 
 # Hide titlebar
 new_window pixel
 
 # i3-gaps
-gaps inner 6
-
 # Font for window titles.
 font pango: SauceCodePro Nerd Font Black 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# Default borders
-default_border none
-default_floating_border none
+# Default borders: 2px for all the windows; no borders for fullscreen
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders both
+
+# Default gaps
+gaps inner 7
+smart_gaps on
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -96,8 +92,6 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-
-
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -216,11 +210,13 @@ mode "move_workspace" {
     bindsym Escape mode "default"
 }
 
+set $polybar_loc $HOME/dotfiles/config/polybar/polybar3
 bindsym $mod+o mode "move_workspace"
 exec_always setxkbmap -layout us, rs -variant, qwerty
 exec_always setxkbmap -option 'grp:ctrl_alt_toggle'
 bindsym $mod+c exec --no-startup-id code ~/.config/i3/config
-bindsym $mod+p exec --no-startup-id code ~/.config/polybar/config.ini
+bindsym $mod+p exec --no-startup-id code $polybar_loc/config.ini
+bindsym $mod+g exec --no-startup-id google-chrome-stable
 # exec_always "setxkbmap -option 'grp:alt_shift_toggle' -layout us,rs1 -variant ,qwerty"
 
 # RGB
@@ -244,9 +240,6 @@ client.focused_inactive     $acqua   $acqua     $silver  $acqua
 client.urgent               $magenta $magenta   $silver  $magenta
 client.placeholder          $magenta $magenta   $silver  $magenta
 
-
-gaps inner 7
-smart_gaps on
 bindsym $mod+Shift+g mode "gaps_inner"
 mode "gaps_inner" {
         bindsym plus  gaps inner current plus 5
@@ -278,13 +271,15 @@ mode "gaps_inner" {
 #    }
 # }
 assign [class="Slack"] $ws1
+assign [class="code-oss"] $ws2
+assign [class="code"] $ws2
 assign [class="Code"] $ws2
 assign [class="Google-chrome"] $ws3
-assign [class="postman"] $ws4
-assign [class="zoom"] $ws5
+assign [class="Postman"] $ws4
+assign [class="zoom"] $ws6
 
 exec_always feh --bg-scale $HOME/Downloads/wp.jpg # Set background
-exec_always --no-startup-id $HOME/dotfiles/config/polybar/polybar2/launch.sh
+exec_always --no-startup-id $polybar_loc/launch.sh
 exec xrandr --output $monitor2 --mode 1920x1080 --left-of $monitor1 # Setup monitors
 exec_always --no-startup-id dunst -config $HOME/.config/i3/dunst/dunstrc # Start notification daemon
 exec --no-startup-id blueman-applet # Bluetooth applet
