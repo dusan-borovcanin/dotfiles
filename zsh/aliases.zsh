@@ -77,7 +77,7 @@ alias gmf='git merge --no-ff'
 alias gmt='git mergetool'
 
 # terminal
-alias terminal="gnome-terminal"
+alias terminal="st"
 
 # terminal youtube
 alias yt="mpsyt"
