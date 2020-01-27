@@ -21,7 +21,7 @@ gaps inner 5
 smart_gaps on
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec st -f "DejaVu Sans Mono Nerd Font:size=10"
 
 # kill focused window
 bindsym $mod+shift+q kill
@@ -69,7 +69,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+t floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -137,6 +137,12 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
 bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 
+
+# bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
+# bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
+# bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3block
+
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -163,6 +169,21 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+     bindsym l exec --no-startup-id i3exit lock, mode "default"
+     bindsym e exec --no-startup-id i3exit logout, mode "default"
+     bindsym s exec --no-startup-id i3exit suspend, mode "default"
+     bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+     bindsym r exec --no-startup-id i3exit reboot, mode "default"
+     bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+     # back to normal: Enter or Escape
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
+ bindsym $mod+Escape mode "$mode_system"
 
 set $monitor1 DP1
 set $monitor2 eDP1
@@ -203,7 +224,7 @@ set $orange  #ff8700
 
 # RGBA
 set $cyan    #4ec2f799
-set $aqua   #00708999
+set $aqua    #00708999
 set $wine    #72003e99
 set $magenta #af005f99
 set $silver  #e4e4e499
@@ -215,9 +236,9 @@ set $shade1 #004D40
 set $shade2 #00897B
 
 # Set some nice colors      border   background text	   indicator   child_border
-client.focused              $shade1  $shade1    $silver0   $shade1     $shade2
-client.unfocused            $shade2  $shade2    $silver0   $elegant    $shade1
-client.focused_inactive     $aqua    $aqua      $silver0   $aqua
+client.focused              $shade2  $shade2    $silver0   $shade2     $shade2
+client.unfocused            $shade1  $shade1    $silver0   $shade1     $shade1
+client.focused_inactive     $shade1  $shade1    $silver0   $shade1
 client.urgent               $magenta $magenta   $silver0   $magenta
 client.placeholder          $magenta $magenta   $silver0   $magenta
 
@@ -237,20 +258,20 @@ mode "gaps_inner" {
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-# bar {
-#        status_command i3blocks -c ~/.config/i3/.i3blocks.conf
-#        position top
-#        i3bar_command i3bar -t
-#        font pango: SauceCodePro Nerd Font Black 10
-#        colors {
-#                                       # Border  # Background  # Text
-# 		    focused_workspace   $silver0  $silver0      $elegant
-# 		    active_workspace    $elegant  $elegant      $orange
-# 		    inactive_workspace  $elegant  $elegant 	$cyan0
-# 		    urgent_workspace    $aqua     $aqua        $silver0
-# 		    background          $elegant
-#    }
-# }
+#  bar {
+#         status_command i3blocks -c ~/dotfiles/config/i3/.i3blocks.conf
+#         position top
+# #        i3bar_command i3bar -t
+#         font pango: SauceCodePro Nerd Font Black 11
+#         colors {
+#                                        # Border  # Background  # Text
+#  		    focused_workspace   $shade1   $shade2       $elegant
+#  		    active_workspace    $shade2   $shade1       $shade2
+#  		    inactive_workspace  $elegant  $elegant 	$shade2
+#  		    urgent_workspace    $wine     $magenta      $silver0
+#  		    background          $elegant
+#     }
+#  }
 assign [class="Slack"] $ws1
 assign [class="code-oss"] $ws2
 assign [class="code"] $ws2
