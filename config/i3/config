@@ -7,6 +7,7 @@ new_window pixel
 # i3-gaps
 # Font for window titles.
 font pango: SauceCodePro Nerd Font Black 11
+# font pango: DejaVu Sans Mono Nerd Font 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -137,11 +138,9 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
 bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 
-
 # bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
 # bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
 # bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3block
-
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -214,33 +213,28 @@ exec_always setxkbmap -layout us, rs -variant, qwerty
 exec_always setxkbmap -option 'grp:ctrl_alt_toggle'
 bindsym $mod+c exec --no-startup-id code ~/.config/i3/config
 bindsym $mod+p exec --no-startup-id code $polybar_loc/config.ini
-bindsym $mod+g exec --no-startup-id google-chrome-stable
+bindsym $mod+g exec --no-startup-id brave
+
 # exec_always "setxkbmap -option 'grp:alt_shift_toggle' -layout us,rs1 -variant ,qwerty"
 
 # RGB
-set $cyan0   #4ec2f7
-set $silver0 #e4e4e4
+set $silver  #e4e4e4
 set $orange  #ff8700
 
 # RGBA
-set $cyan    #4ec2f799
-set $aqua    #00708999
-set $wine    #72003e99
-set $magenta #af005f99
-set $silver  #e4e4e499
-set $toxic   #8EC00099
-set $elegant #00002c30
+set $blue    #4ec2f799
+set $red     #FF000099
 
 # Shades
 set $shade1 #004D40
 set $shade2 #00897B
 
 # Set some nice colors      border   background text	   indicator   child_border
-client.focused              $shade2  $shade2    $silver0   $shade2     $shade2
-client.unfocused            $shade1  $shade1    $silver0   $shade1     $shade1
-client.focused_inactive     $shade1  $shade1    $silver0   $shade1
-client.urgent               $magenta $magenta   $silver0   $magenta
-client.placeholder          $magenta $magenta   $silver0   $magenta
+client.focused              $shade2  $shade2    $silver    $shade2     $shade2
+client.unfocused            $shade1  $shade1    $silver    $shade1     $shade1
+client.focused_inactive     $shade1  $shade1    $silver    $shade1
+client.urgent               $red     $red       $silver    $red
+client.placeholder          $red     $red       $silver    $red
 
 bindsym $mod+Shift+g mode "gaps_inner"
 mode "gaps_inner" {
@@ -256,6 +250,9 @@ mode "gaps_inner" {
         bindsym Escape mode "default"
 }
 
+# set $wine    #72003e99
+# set $elegant #00002c30
+# set $toxic   #8EC00099
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 #  bar {
@@ -264,27 +261,48 @@ mode "gaps_inner" {
 # #        i3bar_command i3bar -t
 #         font pango: SauceCodePro Nerd Font Black 11
 #         colors {
-#                                        # Border  # Background  # Text
+#                                       # Border  # Background  # Text
 #  		    focused_workspace   $shade1   $shade2       $elegant
 #  		    active_workspace    $shade2   $shade1       $shade2
 #  		    inactive_workspace  $elegant  $elegant 	$shade2
-#  		    urgent_workspace    $wine     $magenta      $silver0
+#  		    urgent_workspace    $wine     $red          $silver
 #  		    background          $elegant
 #     }
 #  }
+
+# Assign windows to workspaces
 assign [class="Slack"] $ws1
 assign [class="code-oss"] $ws2
 assign [class="code"] $ws2
 assign [class="Code"] $ws2
-assign [class="Google-chrome"] $ws3
+assign [class="brave-browser"] $ws3
+assign [class="Brave-browser"] $ws3
 assign [class="Postman"] $ws4
 assign [class="zoom"] $ws6
 
+
+# Dropdown window
+for_window [instance="dropdown_*"] floating enable
+for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] sticky enable
+for_window [instance="dropdown_*"] scratchpad show
+
+# Set dropdown terminal
+for_window [instance="dropdown_term"] resize set 620 780
+for_window [instance="dropdown_term"] move position 1300 60
+
+# Dropdown bindings
+exec --no-startup-id st -f "DejaVu Sans Mono Nerd Font:size=10" -n dropdown_term -t dropdown -g 664xX824
+bindsym $mod+u [instance="dropdown_term"] scratchpad show
+bindsym $mod+Shift+u exec st -n dropdown_term -f "DejaVu Sans Mono Nerd Font:size=10" &
+
+
+# Startup
 exec_always feh --bg-scale $HOME/Downloads/wp.jpg # Set background
 exec_always --no-startup-id $polybar_loc/launch.sh
 exec xrandr --output $monitor2 --mode 1920x1080 --left-of $monitor1 # Setup monitors
 exec_always --no-startup-id dunst -config $HOME/.config/i3/dunst/dunstrc # Start notification daemon
 exec --no-startup-id blueman-applet # Bluetooth applet
 exec --no-startup-id nm-applet # Applet for NetworkManager
-exec --no-startup-id compton #Composer for transparency
+exec --no-startup-id picom #Composer for transparency
 exec --no-startup-id $HOME/dotfiles/config/i3/startup.sh # Startup programs
