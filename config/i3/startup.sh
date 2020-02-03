@@ -1,3 +1,5 @@
-google-chrome-stable & \
+#!/bin/sh
+
+brave & \
 code & \
 slack &
