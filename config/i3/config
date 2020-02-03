@@ -285,11 +285,12 @@ assign [class="zoom"] $ws6
 for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
+for_window [instance="dropdown_*"] border pixel 1
 for_window [instance="dropdown_*"] scratchpad show
 
 # Set dropdown terminal
 for_window [instance="dropdown_term"] resize set 620 780
-for_window [instance="dropdown_term"] move position 1300 60
+for_window [instance="dropdown_term"] move position 1298 60
 
 # Dropdown bindings
 exec --no-startup-id st -f "DejaVu Sans Mono Nerd Font:size=10" -n dropdown_term -t dropdown -g 664xX824
