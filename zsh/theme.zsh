@@ -13,58 +13,6 @@
 # The default configuration, that can be overwrite in your .zshrc file
 # ------------------------------------------------------------------------------
 
-# Get the status of the working tree
-function git_prompt_status() {
-  local INDEX STATUS
-  INDEX=$(command git status --porcelain -b 2> /dev/null)
-  STATUS=""
-  if $(echo "$INDEX" | command grep -E '^\?\? ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_UNTRACKED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^A  ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
-  elif $(echo "$INDEX" | grep '^M  ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
-  elif $(echo "$INDEX" | grep '^MM ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^ M ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
-  elif $(echo "$INDEX" | grep '^AM ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
-  elif $(echo "$INDEX" | grep '^MM ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
-  elif $(echo "$INDEX" | grep '^ T ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^R  ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_RENAMED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^ D ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
-  elif $(echo "$INDEX" | grep '^D  ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
-  elif $(echo "$INDEX" | grep '^AD ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
-  fi
-  if $(command git rev-parse --verify refs/stash >/dev/null 2>&1); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_STASHED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_UNMERGED$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^## [^ ]\+ .*ahead' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_AHEAD$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^## [^ ]\+ .*behind' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_BEHIND$STATUS"
-  fi
-  if $(echo "$INDEX" | grep '^## [^ ]\+ .*diverged' &> /dev/null); then
-    STATUS="$ZSH_THEME_GIT_PROMPT_DIVERGED$STATUS"
-  fi
-  echo $STATUS
-}
-
 # Outputs current branch info in prompt format
 function git_prompt_info() {
   local ref
@@ -78,12 +26,7 @@ function parse_git_dirty() {
   local STATUS=''
   local -a FLAGS
   FLAGS=('--porcelain')
-  if [[ $POST_1_7_2_GIT -gt 0 ]]; then
-    FLAGS+='--ignore-submodules=dirty'
-  fi
-  if [[ "$DISABLE_UNTRACKED_FILES_DIRTY" == "true" ]]; then
-    FLAGS+='--untracked-files=no'
-  fi
+  FLAGS+='--ignore-submodules=dirty'
   STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
   if [[ -n $STATUS ]]; then
     echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
@@ -93,166 +36,48 @@ function parse_git_dirty() {
 }
 
 # PROMPT
-if [ ! -n "${BULLETTRAIN_PROMPT_CHAR+1}" ]; then
-  BULLETTRAIN_PROMPT_CHAR="\$"
-fi
-if [ ! -n "${BULLETTRAIN_PROMPT_ROOT+1}" ]; then
-  BULLETTRAIN_PROMPT_ROOT=true
-fi
-if [ ! -n "${BULLETTRAIN_PROMPT_SEPARATE_LINE+1}" ]; then
-  BULLETTRAIN_PROMPT_SEPARATE_LINE=true
-fi
-if [ ! -n "${BULLETTRAIN_PROMPT_ADD_NEWLINE+1}" ]; then
-  BULLETTRAIN_PROMPT_ADD_NEWLINE=true
-fi
+BULLETTRAIN_PROMPT_CHAR="\$"
+BULLETTRAIN_PROMPT_SEPARATE_LINE=true
 
 # STATUS
-if [ ! -n "${BULLETTRAIN_STATUS_EXIT_SHOW+1}" ]; then
-  BULLETTRAIN_STATUS_EXIT_SHOW=false
-fi
-if [ ! -n "${BULLETTRAIN_STATUS_BG+1}" ]; then
-  BULLETTRAIN_STATUS_BG=green
-fi
-if [ ! -n "${BULLETTRAIN_STATUS_ERROR_BG+1}" ]; then
-  BULLETTRAIN_STATUS_ERROR_BG=red
-fi
-if [ ! -n "${BULLETTRAIN_STATUS_FG+1}" ]; then
-  BULLETTRAIN_STATUS_FG=white
-fi
+BULLETTRAIN_STATUS_BG=green
+BULLETTRAIN_STATUS_ERROR_BG=red
+BULLETTRAIN_STATUS_FG=white
 
 # TIME
-if [ ! -n "${BULLETTRAIN_TIME_BG+1}" ]; then
-  BULLETTRAIN_TIME_BG=white
-fi
-if [ ! -n "${BULLETTRAIN_TIME_FG+1}" ]; then
-  BULLETTRAIN_TIME_FG=black
-fi
+BULLETTRAIN_TIME_BG=black
+BULLETTRAIN_TIME_FG=white
 
 # DIR
-if [ ! -n "${BULLETTRAIN_DIR_BG+1}" ]; then
-  BULLETTRAIN_DIR_BG=green
-fi
-if [ ! -n "${BULLETTRAIN_DIR_FG+1}" ]; then
-  BULLETTRAIN_DIR_FG=white
-fi
-if [ ! -n "${BULLETTRAIN_DIR_CONTEXT_SHOW+1}" ]; then
-  BULLETTRAIN_DIR_CONTEXT_SHOW=false
-fi
-if [ ! -n "${BULLETTRAIN_DIR_EXTENDED+1}" ]; then
-  BULLETTRAIN_DIR_EXTENDED=1
-fi
+BULLETTRAIN_DIR_BG=green
+BULLETTRAIN_DIR_FG=white
 
 # GIT
-if [ ! -n "${BULLETTRAIN_GIT_COLORIZE_DIRTY+1}" ]; then
-  BULLETTRAIN_GIT_COLORIZE_DIRTY=false
-fi
-if [ ! -n "${BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR+1}" ]; then
-  BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR=black
-fi
-if [ ! -n "${BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR+1}" ]; then
-  BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR=yellow
-fi
-if [ ! -n "${BULLETTRAIN_GIT_BG+1}" ]; then
-  BULLETTRAIN_GIT_BG=white
-fi
-if [ ! -n "${BULLETTRAIN_GIT_FG+1}" ]; then
-  BULLETTRAIN_GIT_FG=black
-fi
-if [ ! -n "${BULLETTRAIN_GIT_EXTENDED+1}" ]; then
-  BULLETTRAIN_GIT_EXTENDED=true
-fi
-if [ ! -n "${BULLETTRAIN_GIT_PROMPT_CMD+1}" ]; then
-  BULLETTRAIN_GIT_PROMPT_CMD="\$(git_prompt_info)"
-fi
-
-# CONTEXT
-if [ ! -n "${BULLETTRAIN_CONTEXT_BG+1}" ]; then
-  BULLETTRAIN_CONTEXT_BG=black
-fi
-if [ ! -n "${BULLETTRAIN_CONTEXT_FG+1}" ]; then
-  BULLETTRAIN_CONTEXT_FG=default
-fi
-if [ ! -n "${BULLETTRAIN_CONTEXT_HOSTNAME+1}" ]; then
-  BULLETTRAIN_CONTEXT_HOSTNAME=%m
-fi
+BULLETTRAIN_GIT_COLORIZE_DIRTY=false
+BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR=black
+BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR=yellow
+BULLETTRAIN_GIT_BG=white
+BULLETTRAIN_GIT_FG=black
+BULLETTRAIN_GIT_PROMPT_CMD="\$(git_prompt_info)"
 
 # GIT PROMPT
-if [ ! -n "${BULLETTRAIN_GIT_PREFIX+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_PREFIX="\ue0a0 "
-else
-  ZSH_THEME_GIT_PROMPT_PREFIX=$BULLETTRAIN_GIT_PREFIX
-fi
-if [ ! -n "${BULLETTRAIN_GIT_SUFFIX+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_SUFFIX=""
-else
-  ZSH_THEME_GIT_PROMPT_SUFFIX=$BULLETTRAIN_GIT_SUFFIX
-fi
-if [ ! -n "${BULLETTRAIN_GIT_DIRTY+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}✘%F{black}"
-else
-  ZSH_THEME_GIT_PROMPT_DIRTY=$BULLETTRAIN_GIT_DIRTY
-fi
-if [ ! -n "${BULLETTRAIN_GIT_CLEAN+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}✔%F{black}"
-else
-  ZSH_THEME_GIT_PROMPT_CLEAN=$BULLETTRAIN_GIT_CLEAN
-fi
-if [ ! -n "${BULLETTRAIN_GIT_ADDED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_ADDED=" %F{green}✚%F{black}"
-else
-  ZSH_THEME_GIT_PROMPT_ADDED=$BULLETTRAIN_GIT_ADDED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_MODIFIED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_MODIFIED=" %F{blue}✹%F{black}"
-else
-  ZSH_THEME_GIT_PROMPT_MODIFIED=$BULLETTRAIN_GIT_MODIFIED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_DELETED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_DELETED=" %F{red}✖%F{black}"
-else
-  ZSH_THEME_GIT_PROMPT_DELETED=$BULLETTRAIN_GIT_DELETED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_UNTRACKED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_UNTRACKED=" %F{green}✭%F{black}"
-else
-  ZSH_THEME_GIT_PROMPT_UNTRACKED=$BULLETTRAIN_GIT_UNTRACKED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_RENAMED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_RENAMED=" ➜"
-else
-  ZSH_THEME_GIT_PROMPT_RENAMED=$BULLETTRAIN_GIT_RENAMED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_UNMERGED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_UNMERGED=" ═"
-else
-  ZSH_THEME_GIT_PROMPT_UNMERGED=$BULLETTRAIN_GIT_UNMERGED
-fi
-if [ ! -n "${BULLETTRAIN_GIT_AHEAD+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_AHEAD=" ⬆"
-else
-  ZSH_THEME_GIT_PROMPT_AHEAD=$BULLETTRAIN_GIT_AHEAD
-fi
-if [ ! -n "${BULLETTRAIN_GIT_BEHIND+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_BEHIND=" ⬇"
-else
-  ZSH_THEME_GIT_PROMPT_BEHIND=$BULLETTRAIN_GIT_BEHIND
-fi
-if [ ! -n "${BULLETTRAIN_GIT_DIVERGED+1}" ]; then
-  ZSH_THEME_GIT_PROMPT_DIVERGED=" ⬍"
-else
-  ZSH_THEME_GIT_PROMPT_DIVERGED=$BULLETTRAIN_GIT_PROMPT_DIVERGED
-fi
+ZSH_THEME_GIT_PROMPT_PREFIX="\ue0a0 "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}✘%F{black}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}✔%F{black}"
+ZSH_THEME_GIT_PROMPT_ADDED=" %F{green}✚%F{black}"
+ZSH_THEME_GIT_PROMPT_MODIFIED=" %F{blue}✹%F{black}"
+ZSH_THEME_GIT_PROMPT_DELETED=" %F{red}✖%F{black}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED=" %F{green}✭%F{black}"
+ZSH_THEME_GIT_PROMPT_RENAMED=" ➜"
+ZSH_THEME_GIT_PROMPT_UNMERGED=" ═"
+ZSH_THEME_GIT_PROMPT_AHEAD=" ⬆"
+ZSH_THEME_GIT_PROMPT_BEHIND=" ⬇"
+ZSH_THEME_GIT_PROMPT_DIVERGED=" ⬍"
 
 # COMMAND EXECUTION TIME
-if [ ! -n "${BULLETTRAIN_EXEC_TIME_ELAPSED+1}" ]; then
-  BULLETTRAIN_EXEC_TIME_ELAPSED=5
-fi
-if [ ! -n "${BULLETTRAIN_EXEC_TIME_BG+1}" ]; then
-  BULLETTRAIN_EXEC_TIME_BG=yellow
-fi
-if [ ! -n "${BULLETTRAIN_EXEC_TIME_FG+1}" ]; then
-  BULLETTRAIN_EXEC_TIME_FG=black
-fi
+BULLETTRAIN_EXEC_TIME_ELAPSED=5
+BULLETTRAIN_EXEC_TIME_BG=yellow
+BULLETTRAIN_EXEC_TIME_FG=black
 
 
 # ------------------------------------------------------------------------------
@@ -296,17 +121,6 @@ prompt_end() {
 # to be shown
 # ------------------------------------------------------------------------------
 
-# Context: user@hostname (who am I and where am I)
-context() {
-  local user="$(whoami)"
-  [[ "$user" != "$BULLETTRAIN_CONTEXT_DEFAULT_USER" || -n "$BULLETTRAIN_IS_SSH_CLIENT" ]] && echo -n "${user}@$BULLETTRAIN_CONTEXT_HOSTNAME"
-}
-
-prompt_context() {
-  local _context="$(context)"
-  [[ -n "$_context" ]] && prompt_segment $BULLETTRAIN_CONTEXT_BG $BULLETTRAIN_CONTEXT_FG "$_context"
-}
-
 # Based on http://stackoverflow.com/a/32164707/3859566
 function displaytime {
   local T=$1
@@ -337,40 +151,25 @@ prompt_cmd_exec_time() {
 
 # Git
 prompt_git() {
-  local ref dirty mode repo_path git_prompt
+  local git_prompt
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
-    if [[ $BULLETTRAIN_GIT_COLORIZE_DIRTY == true && -n $(git status --porcelain --ignore-submodules) ]]; then
+    if [[ -n $(git status --porcelain --ignore-submodules) ]]; then
       BULLETTRAIN_GIT_BG=$BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR
       BULLETTRAIN_GIT_FG=$BULLETTRAIN_GIT_COLORIZE_DIRTY_FG_COLOR
     fi
     prompt_segment $BULLETTRAIN_GIT_BG $BULLETTRAIN_GIT_FG
 
     eval git_prompt=${BULLETTRAIN_GIT_PROMPT_CMD}
-    if [[ $BULLETTRAIN_GIT_EXTENDED == true ]]; then
-      echo -n ${git_prompt}$(git_prompt_status)
-    else
-      echo -n ${git_prompt}
-    fi
+    echo -n ${git_prompt}
   fi
 }
 
 # Dir: current working directory
 prompt_dir() {
   local dir=''
-  local _context="$(context)"
-  [[ $BULLETTRAIN_DIR_CONTEXT_SHOW == true && -n "$_context" ]] && dir="${dir}${_context}:"
 
-  if [[ $BULLETTRAIN_DIR_EXTENDED == 0 ]]; then
-    #short directories
-    dir="${dir}%1~"
-  elif [[ $BULLETTRAIN_DIR_EXTENDED == 2 ]]; then
-    #long directories
-    dir="${dir}%0~"
-  else
-    #medium directories (default case)
-    dir="${dir}%4(c:...:)%3c"
-  fi
-
+  #medium directories (default case)
+  dir="${dir}%4(c:...:)%3c"
   prompt_segment $BULLETTRAIN_DIR_BG $BULLETTRAIN_DIR_FG $dir
 }
 
@@ -389,8 +188,7 @@ prompt_time() {
 prompt_status() {
   local symbols
   symbols=()
-  [[ $RETVAL -ne 0 && $BULLETTRAIN_STATUS_EXIT_SHOW != true ]] && symbols+="✘"
-  [[ $RETVAL -ne 0 && $BULLETTRAIN_STATUS_EXIT_SHOW == true ]] && symbols+="✘ $RETVAL"
+  [[ $RETVAL -ne 0 ]] && symbols+="✘"
   [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡%f"
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="⚙"
 
@@ -405,13 +203,9 @@ prompt_status() {
 prompt_chars() {
   local bt_prompt_chars="${BULLETTRAIN_PROMPT_CHAR}"
 
-  if [[ $BULLETTRAIN_PROMPT_ROOT == true ]]; then
-    bt_prompt_chars="%(!.%F{red}# .%F{green}${bt_prompt_chars}%f)"
-  fi
-
-  if [[ $BULLETTRAIN_PROMPT_SEPARATE_LINE == false ]]; then
-    bt_prompt_chars="${bt_prompt_chars}"
-  fi
+  # if [[ $BULLETTRAIN_PROMPT_ROOT == true ]]; then
+  #   bt_prompt_chars="%(!.%F{red}# .%F{green}${bt_prompt_chars}%f)"
+  # fi
 
   echo -n "$bt_prompt_chars"
 
@@ -440,5 +234,3 @@ PROMPT=''
 PROMPT="$PROMPT"'%{%f%b%k%}$(build_prompt)'
 [[ $BULLETTRAIN_PROMPT_SEPARATE_LINE == true ]] && PROMPT="$PROMPT$NEWLINE"
 PROMPT="$PROMPT"'%{${green[default]}%}'
-[[ $BULLETTRAIN_PROMPT_SEPARATE_LINE == false ]] && PROMPT="$PROMPT "
-PROMPT="$PROMPT"'$(prompt_chars)%{$reset_color%}'
