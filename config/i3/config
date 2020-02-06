@@ -7,7 +7,6 @@ new_window pixel
 # i3-gaps
 # Font for window titles.
 font pango: SauceCodePro Nerd Font Black 11
-# font pango: DejaVu Sans Mono Nerd Font 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -28,10 +27,8 @@ bindsym $mod+Return exec st -f "DejaVu Sans Mono Nerd Font:size=10"
 bindsym $mod+shift+q kill
 
 # start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
-# bindsym $mod+d exec rofi -lines 12 -padding 18 -location 0 -show drun -sidebar-mode -columns 3
 bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono Nerd Font:size=14' -nb '#004D40' -sb '#00897B' -i
-bindsym $mod+Shift+s exec --no-startup-id $HOME/dotfiles/config/i3/scripts/search.sh
+bindsym $mod+Shift+d exec --no-startup-id $HOME/dotfiles/config/i3/scripts/search
 
 # change focus
 bindsym $mod+j focus left
@@ -120,11 +117,11 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# restart i3 in-place (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t error -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # audio and screen shortcuts
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
@@ -137,11 +134,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
 bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 
-# bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
-# bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
-# bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3block
-
-# resize window (you can also use the mouse for that)
+# Resize window (you can also use the mouse)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -206,6 +199,7 @@ mode "move_workspace" {
     bindsym Escape mode "default"
 }
 
+# Polybar config
 set $polybar_loc $HOME/dotfiles/config/polybar/polybar2
 bindsym $mod+o mode "move_workspace"
 exec_always setxkbmap -layout us, rs -variant, qwerty
@@ -214,17 +208,10 @@ bindsym $mod+c exec --no-startup-id code ~/.config/i3/config
 bindsym $mod+p exec --no-startup-id code $polybar_loc/config.ini
 bindsym $mod+g exec --no-startup-id brave
 
-# exec_always "setxkbmap -option 'grp:alt_shift_toggle' -layout us,rs1 -variant ,qwerty"
-
 # RGB
 set $silver  #e4e4e4
-set $orange  #ff8700
+set $red     #FF0000
 
-# RGBA
-set $blue    #4ec2f799
-set $red     #FF000099
-
-# Shades
 set $shade1 #004D40
 set $shade2 #00897B
 
@@ -249,26 +236,6 @@ mode "gaps_inner" {
         bindsym Escape mode "default"
 }
 
-# set $wine    #72003e99
-# set $elegant #00002c30
-# set $toxic   #8EC00099
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#  bar {
-#         status_command i3blocks -c ~/dotfiles/config/i3/.i3blocks.conf
-#         position top
-# #        i3bar_command i3bar -t
-#         font pango: SauceCodePro Nerd Font Black 11
-#         colors {
-#                                       # Border  # Background  # Text
-#  		    focused_workspace   $shade1   $shade2       $elegant
-#  		    active_workspace    $shade2   $shade1       $shade2
-#  		    inactive_workspace  $elegant  $elegant 	$shade2
-#  		    urgent_workspace    $wine     $red          $silver
-#  		    background          $elegant
-#     }
-#  }
-
 # Assign windows to workspaces
 assign [class="Slack"] $ws1
 assign [class="code-oss"] $ws2
@@ -279,23 +246,26 @@ assign [class="Brave-browser"] $ws3
 assign [class="Postman"] $ws4
 assign [class="zoom"] $ws6
 
-
 # Dropdown window
 for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_*"] border pixel 1
-for_window [instance="dropdown_*"] scratchpad show
 
 # Set dropdown terminal
 for_window [instance="dropdown_term"] resize set 620 780
 for_window [instance="dropdown_term"] move position 1298 60
 
-# Dropdown bindings
+# Default dropdown
 exec --no-startup-id st -f "DejaVu Sans Mono Nerd Font:size=10" -n dropdown_term -t dropdown -g 664xX824
+
+# Scratchpad
 bindsym $mod+u [instance="dropdown_term"] scratchpad show
 bindsym $mod+Shift+u exec st -n dropdown_term -f "DejaVu Sans Mono Nerd Font:size=10" &
 
+## Move to and from scratchpad
+bindsym $mod+Shift+m move scratchpad
+bindsym $mod+m scratchpad show
 
 # Startup
 exec_always feh --bg-scale $HOME/Downloads/wp.jpg # Set background
