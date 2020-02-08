@@ -4,6 +4,9 @@
 count=$(xrandr | grep "DP-*. connected" | wc | awk '{print $1}')
 [ count > 1 ] && xrandr --output eDP-1 --off
 
-brave & \
-code & \
-slack &
+day=$(date '+%a')
+# Start Slack only on workdays.
+[ $day != "Sat" ] && [ $day != "Sun" ] && slack &
+
+code &
+brave &
