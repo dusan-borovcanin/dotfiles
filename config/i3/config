@@ -21,7 +21,7 @@ gaps inner 5
 smart_gaps on
 
 # start a terminal
-bindsym $mod+Return exec st -f "DejaVu Sans Mono Nerd Font:size=10"
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+shift+q kill
@@ -256,12 +256,11 @@ for_window [instance="dropdown_*"] border pixel 1
 for_window [instance="dropdown_term"] resize set 620 780
 for_window [instance="dropdown_term"] move position 1298 60
 
-# Default dropdown
-exec --no-startup-id st -f "DejaVu Sans Mono Nerd Font:size=10" -n dropdown_term -t dropdown -g 664xX824
-
 # Scratchpad
+
+## Floating terminal
 bindsym $mod+u [instance="dropdown_term"] scratchpad show
-bindsym $mod+Shift+u exec st -n dropdown_term -f "DejaVu Sans Mono Nerd Font:size=10" &
+bindsym $mod+Shift+u exec st -n dropdown_term -f "DejaVu Sans Mono Nerd Font:size=10" -A 1 &
 
 ## Move to and from scratchpad
 bindsym $mod+Shift+m move scratchpad
@@ -275,4 +274,7 @@ exec_always --no-startup-id dunst -config $HOME/.config/i3/dunst/dunstrc # Start
 exec --no-startup-id blueman-applet # Bluetooth applet
 exec --no-startup-id nm-applet # Applet for NetworkManager
 exec --no-startup-id picom #Composer for transparency
-exec --no-startup-id $HOME/dotfiles/config/i3/startup.sh # Startup programs
+exec --no-startup-id $HOME/dotfiles/config/i3/scripts/startup # Startup programs
+
+## Add and remove to/from startup file
+bindsym $mod+Shift+a exec $HOME/dotfiles/config/i3/scripts/autoload
