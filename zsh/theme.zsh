@@ -13,32 +13,6 @@
 # The default configuration, that can be overwrite in your .zshrc file
 # ------------------------------------------------------------------------------
 
-# Outputs current branch info in prompt format
-function git_prompt_info() {
-  local ref
-  ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
-}
-
-# Checks if working tree is dirty
-function parse_git_dirty() {
-  local STATUS=''
-  local -a FLAGS
-  FLAGS=('--porcelain')
-  FLAGS+='--ignore-submodules=dirty'
-  STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
-  if [[ -n $STATUS ]]; then
-    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
-  else
-    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
-  fi
-}
-
-# PROMPT
-BULLETTRAIN_PROMPT_CHAR="\$"
-BULLETTRAIN_PROMPT_SEPARATE_LINE=true
-
 # STATUS
 BULLETTRAIN_STATUS_BG=green
 BULLETTRAIN_STATUS_ERROR_BG=red
@@ -61,23 +35,14 @@ BULLETTRAIN_GIT_FG=black
 BULLETTRAIN_GIT_PROMPT_CMD="\$(git_prompt_info)"
 
 # GIT PROMPT
-ZSH_THEME_GIT_PROMPT_PREFIX="\ue0a0 "
-ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}✘%F{black}"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}✔%F{black}"
-ZSH_THEME_GIT_PROMPT_ADDED=" %F{green}✚%F{black}"
-ZSH_THEME_GIT_PROMPT_MODIFIED=" %F{blue}✹%F{black}"
-ZSH_THEME_GIT_PROMPT_DELETED=" %F{red}✖%F{black}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED=" %F{green}✭%F{black}"
-ZSH_THEME_GIT_PROMPT_RENAMED=" ➜"
-ZSH_THEME_GIT_PROMPT_UNMERGED=" ═"
-ZSH_THEME_GIT_PROMPT_AHEAD=" ⬆"
-ZSH_THEME_GIT_PROMPT_BEHIND=" ⬇"
-ZSH_THEME_GIT_PROMPT_DIVERGED=" ⬍"
+ZSH_THEME_GIT_PROMPT_PREFIX="\ue0a0"
+ZSH_THEME_GIT_PROMPT_DIRTY="%F{red}✘%F{black}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%F{green}✔%F{black}"
 
 # COMMAND EXECUTION TIME
-BULLETTRAIN_EXEC_TIME_ELAPSED=5
-BULLETTRAIN_EXEC_TIME_BG=yellow
-BULLETTRAIN_EXEC_TIME_FG=black
+BULLETTRAIN_EXEC_TIME_ELAPSED=3
+BULLETTRAIN_EXEC_TIME_BG=red
+BULLETTRAIN_EXEC_TIME_FG=white
 
 
 # ------------------------------------------------------------------------------
@@ -96,9 +61,9 @@ prompt_segment() {
   [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
   [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
   if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
-    echo -n " %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
+    echo -n "%{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%}"
   else
-    echo -n "%{$bg%}%{$fg%} "
+    echo -n "%{$bg%}%{$fg%}"
   fi
   CURRENT_BG=$1
   [[ -n $3 ]] && echo -n $3
@@ -107,12 +72,34 @@ prompt_segment() {
 # End the prompt, closing any open segments
 prompt_end() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
   else
     echo -n "%{%k%}"
   fi
   echo -n "%{%f%}"
   CURRENT_BG=''
+}
+
+# Outputs current branch info in prompt format
+function git_prompt_info() {
+  local ref
+  ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)"
+}
+
+# Checks if working tree is dirty
+function parse_git_dirty() {
+  local STATUS=''
+  local -a FLAGS
+  FLAGS=('--porcelain')
+  FLAGS+='--ignore-submodules=dirty'
+  STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+  if [[ -n $STATUS ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+  else
+    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+  fi
 }
 
 # ------------------------------------------------------------------------------
@@ -174,11 +161,7 @@ prompt_dir() {
 }
 
 prompt_time() {
-  if [[ $BULLETTRAIN_TIME_12HR == true ]]; then
-    prompt_segment $BULLETTRAIN_TIME_BG $BULLETTRAIN_TIME_FG %D{%r}
-  else
-    prompt_segment $BULLETTRAIN_TIME_BG $BULLETTRAIN_TIME_FG %D{%T}
-  fi
+  prompt_segment $BULLETTRAIN_TIME_BG $BULLETTRAIN_TIME_FG %D{%T}
 }
 
 # Status:
@@ -199,25 +182,11 @@ prompt_status() {
   fi
 }
 
-# Prompt Character
-prompt_chars() {
-  local bt_prompt_chars="${BULLETTRAIN_PROMPT_CHAR}"
-
-  # if [[ $BULLETTRAIN_PROMPT_ROOT == true ]]; then
-  #   bt_prompt_chars="%(!.%F{red}# .%F{green}${bt_prompt_chars}%f)"
-  # fi
-
-  echo -n "$bt_prompt_chars"
-
-  if [[ -n $BULLETTRAIN_PROMPT_CHAR ]]; then
-    echo -n " "
-  fi
-}
-
 # ------------------------------------------------------------------------------
 # MAIN
 # Entry point
 # ------------------------------------------------------------------------------
+
 build_prompt() {
   RETVAL=$?
   prompt_time
@@ -232,5 +201,5 @@ NEWLINE='
 '
 PROMPT=''
 PROMPT="$PROMPT"'%{%f%b%k%}$(build_prompt)'
-[[ $BULLETTRAIN_PROMPT_SEPARATE_LINE == true ]] && PROMPT="$PROMPT$NEWLINE"
+PROMPT="$PROMPT$NEWLINE"
 PROMPT="$PROMPT"'%{${green[default]}%}'
