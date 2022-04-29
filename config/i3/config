@@ -12,16 +12,22 @@ font pango: SauceCodePro Nerd Font Black 11
 floating_modifier $mod
 
 # Default borders: 4px for all the windows; no borders for fullscreen
+smart_borders on
 default_border pixel 4
 default_floating_border pixel 4
-hide_edge_borders both
 
 # Default gaps
-gaps inner 5
+gaps inner 10
 smart_gaps on
 
 # start a terminal
 bindsym $mod+Return exec st
+
+# activate display
+bindsym $mod+p exec xrandr --output eDP1 --mode 1920x1080
+
+# deactivate display
+bindsym $mod+Shift+p exec xrandr --output eDP1 --off
 
 # kill focused window
 bindsym $mod+shift+q kill
@@ -32,9 +38,7 @@ bindsym $mod+Shift+d exec --no-startup-id $HOME/dotfiles/config/i3/scripts/searc
 
 # change focus
 bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+k focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -174,7 +178,7 @@ mode "$mode_system" {
      bindsym Return mode "default"
      bindsym Escape mode "default"
 }
- bindsym $mod+Escape mode "$mode_system"
+bindsym $mod+Escape mode "$mode_system"
 
 set $monitor1 DP1
 set $monitor2 eDP1
@@ -202,10 +206,11 @@ mode "move_workspace" {
 # Polybar config
 set $polybar_loc $HOME/dotfiles/config/polybar/polybar2
 bindsym $mod+o mode "move_workspace"
-exec_always setxkbmap -layout us, rs -variant, qwerty
-exec_always setxkbmap -option 'grp:ctrl_alt_toggle'
+
+#exec_always setxkbmap -layout us, rs -variant, qwerty
+#exec_always setxkbmap -option grp:ctrl_alt_toggle
+exec_always setxkbmap us,rs,rs -variant ,latin, -option grp:alt_shift_toggle
 bindsym $mod+c exec --no-startup-id code ~/.config/i3/config
-bindsym $mod+p exec --no-startup-id code $polybar_loc/config.ini
 bindsym $mod+g exec --no-startup-id brave
 
 # RGB
@@ -226,11 +231,11 @@ bindsym $mod+Shift+g mode "gaps_inner"
 mode "gaps_inner" {
         bindsym plus  gaps inner current plus 5
         bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
+        bindsym Shift+0     gaps inner current set 0
 
         bindsym Shift+plus  gaps inner all plus 5
         bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
+        bindsym 0     gaps inner all set 0
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -251,6 +256,7 @@ for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_*"] border pixel 1
+for_window [instance="dropdown_term"] border none
 
 # Set dropdown terminal
 for_window [instance="dropdown_term"] resize set 620 780
@@ -267,14 +273,42 @@ bindsym $mod+Shift+m move scratchpad
 bindsym $mod+m scratchpad show
 
 # Startup
-exec_always feh --bg-scale $HOME/Downloads/wp.jpg # Set background
-exec_always --no-startup-id $polybar_loc/launch.sh
-exec xrandr --output $monitor2 --mode 1920x1080 --left-of $monitor1 # Setup monitors
-exec_always --no-startup-id dunst -config $HOME/.config/i3/dunst/dunstrc # Start notification daemon
-exec --no-startup-id blueman-applet # Bluetooth applet
+# exec xrandr --output $monitor2 --mode 1920x1080 --left-of $monitor1 # Setup monitors
+# exec --no-startup-id feh --bg-scale $HOME/Downloads/wp2.png # Set background
+# exec --no-startup-id $polybar_loc/launch.sh
+exec --no-startup-id dunst -config $HOME/dotfiles/config/dunst/dunstrc # Start notification daemon
 exec --no-startup-id nm-applet # Applet for NetworkManager
-exec --no-startup-id picom #Composer for transparency
 exec --no-startup-id $HOME/dotfiles/config/i3/scripts/startup # Startup programs
+# exec --no-startup-id picom #Composer for transparency
+# exec --no-startup-id blueman-applet # Bluetooth applet
 
 ## Add and remove to/from startup file
 bindsym $mod+Shift+a exec $HOME/dotfiles/config/i3/scripts/autoload
+
+# Switch to urgent
+bindsym $mod+x [urgent=latest] focus
+
+
+# bar {
+#     font pango: DejaVu Sans Mono, FontAwesome 12
+#     position bottom
+  #   status_command ~/go/src/github.com/lsgrep/gostatus/gostatus --config ~/go/src/github.com/lsgrep/gostatus.yml
+#    status_command i3status # /home/dusanb/go/src/github.com/dusanb94/bar/script
+#     colors {
+#         separator #666666
+#         background #222222
+#         statusline #dddddd
+#         focused_workspace #0088CC #0088CC #ffffff
+#         active_workspace #333333 #333333 #ffffff
+#         inactive_workspace #333333 #333333 #888888
+#         urgent_workspace #2f343a #900000 #ffffff
+#     }
+# }
+
+
+#bar {
+#      font pango: DejaVu Sans Mono Powerline 12
+#      position bottom
+        # status_command ~/go/src/github.com/lsgrep/gostatus/gostatus --config ~/go/src/github.com/lsgrep/gostatus/gostatus.yml
+# status_command /home/dusanb/go/src/github.com/dusanb94/bar/gobar
+#}
