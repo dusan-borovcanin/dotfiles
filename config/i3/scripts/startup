@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Autoload links file location.
+#file=$HOME/dotfiles/config/i3/scripts/autoload.txt
+
+# Turn built-in monitor off if an external monitor(s) is connected.
+count=$(xrandr | grep "DP-*. connected" | wc | awk '{print $1}')
+if [ "$count" -gt "1" ]; then
+    xrandr --output eDP1 --off
+fi
+
+day=$(date '+%a')
+# Start Slack only on workdays.
+[ $day != "Sat" ] && [ $day != "Sun" ] && slack &
+
+feh --bg-scale $HOME/Downloads/wp2.png & # Set background &
+$HOME/dotfiles/config/polybar/polybar2/launch.sh &
+$HOME/dotfiles/config/i3/scripts/bt.sh &
+code &
+brave &
+#sleep 3
+#lines=$(less $file)
+#for line in $lines
+#do
+#    brave $line &
+#done
