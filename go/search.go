@@ -23,27 +23,29 @@ func main() {
 	a := args[0]
 	var c *exec.Cmd
 	switch {
+	case a == "gmail":
+		c = openBrowser("https://mail.google.com/mail/u/0/\\#inbox")
+	case a == "wa":
+		c = openBrowser("https://web.whatsapp.com")
+	case a == "fb":
+		c = openBrowser("www.facebook.com")
+	case a == "mf":
+		c = openBrowser("https://github.com/mainflux")
+	case a == "mondo":
+		c = openBrowser("www.mondo.rs")
 	case strings.HasPrefix(a, "t "):
 		q := url.URL{Path: strings.TrimSpace(strings.TrimPrefix(a, "t "))}
 		p := q.EscapedPath()
-		c = exec.Command(shell, shellArgs, fmt.Sprintf("%s https://translate.google.rs/?sl=sr\\&tl=en\\&text=%s\\&op=translate", browser, p))
+		c = openBrowser(fmt.Sprintf("https://translate.google.rs/?sl=sr\\&tl=en\\&text=%s\\&op=translate", p))
 	case strings.HasPrefix(a, "t! "):
-		q := url.URL{Path: strings.TrimSpace(strings.TrimPrefix(a, "!t "))}
+		q := url.URL{Path: strings.TrimSpace(strings.TrimPrefix(a, "t! "))}
 		p := q.EscapedPath()
-		c = exec.Command(shell, shellArgs, fmt.Sprintf("%s https://translate.google.rs/?sl=en\\&tl=sr\\&text=%s\\&op=translate", browser, p))
+		c = openBrowser(fmt.Sprintf("https://translate.google.rs/?sl=en\\&tl=sr\\&text=%s\\&op=translate", p))
 	case strings.HasPrefix(a, "yt "):
 		q := url.QueryEscape(strings.TrimPrefix(a, "yt "))
-		c = exec.Command(shell, shellArgs, fmt.Sprintf("%s https://www.youtube.com/results?search_query=%s", browser, q))
-	case a == "mondo":
-		c = exec.Command(shell, shellArgs, fmt.Sprintf("%s www.mondo.rs", browser))
-	case a == "fb":
-		c = exec.Command(shell, shellArgs, fmt.Sprintf("%s www.facebook.com", browser))
-	case a == "wa":
-		c = exec.Command(shell, shellArgs, fmt.Sprintf("%s https://web.whatsapp.com", browser))
-	case a == "mf":
-		c = exec.Command(shell, shellArgs, fmt.Sprintf("%s https://github.com/mainflux", browser))
+		c = openBrowser(fmt.Sprintf("https://www.youtube.com/results?search_query=%s", q))
 	default:
-		c = exec.Command(shell, shellArgs, fmt.Sprintf("%s https://www.google.com/search?q=%s", browser, url.QueryEscape(a)))
+		c = openBrowser(fmt.Sprintf("https://www.google.com/search?q=%s", url.QueryEscape(a)))
 	}
 
 	if c == nil {
@@ -53,4 +55,8 @@ func main() {
 		log.Fatalf("An error ocurred: %s!", err)
 	}
 	os.Exit(0)
+}
+
+func openBrowser(url string) *exec.Cmd {
+	return exec.Command(shell, shellArgs, fmt.Sprintf("%s %s", browser, url))
 }
