@@ -23,8 +23,6 @@ func main() {
 	a := args[0]
 	var c *exec.Cmd
 	switch {
-	case a == "gmail":
-		c = openBrowser("https://mail.google.com/mail/u/0/\\#inbox")
 	case a == "wa":
 		c = openBrowser("https://web.whatsapp.com")
 	case a == "fb":
@@ -41,8 +39,11 @@ func main() {
 		q := url.URL{Path: strings.TrimSpace(strings.TrimPrefix(a, "t! "))}
 		p := q.EscapedPath()
 		c = openBrowser(fmt.Sprintf("https://translate.google.rs/?sl=en\\&tl=sr\\&text=%s\\&op=translate", p))
+	case strings.HasPrefix(a, "gmail "):
+		q := url.QueryEscape(strings.TrimSpace(strings.TrimPrefix(a, "gmail ")))
+		c = openBrowser(fmt.Sprintf("https://mail.google.com/mail/u/0/\\#search/%s", q))
 	case strings.HasPrefix(a, "yt "):
-		q := url.QueryEscape(strings.TrimPrefix(a, "yt "))
+		q := url.QueryEscape(strings.TrimSpace(strings.TrimPrefix(a, "yt ")))
 		c = openBrowser(fmt.Sprintf("https://www.youtube.com/results?search_query=%s", q))
 	default:
 		c = openBrowser(fmt.Sprintf("https://www.google.com/search?q=%s", url.QueryEscape(a)))
