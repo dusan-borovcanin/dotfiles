@@ -39,8 +39,12 @@ func main() {
 		q := url.URL{Path: strings.TrimSpace(strings.TrimPrefix(a, "t! "))}
 		p := q.EscapedPath()
 		c = openBrowser(fmt.Sprintf("https://translate.google.rs/?sl=en\\&tl=sr\\&text=%s\\&op=translate", p))
-	case strings.HasPrefix(a, "gmail "):
-		q := url.QueryEscape(strings.TrimSpace(strings.TrimPrefix(a, "gmail ")))
+	case a == "gmail", strings.HasPrefix(a, "gmail "):
+		q := url.QueryEscape(strings.TrimSpace(strings.TrimPrefix(a, "gmail")))
+		if q == "" {
+			c = openBrowser("https://mail.google.com/mail/u/0/#inbox")
+			break
+		}
 		c = openBrowser(fmt.Sprintf("https://mail.google.com/mail/u/0/\\#search/%s", q))
 	case strings.HasPrefix(a, "yt "):
 		q := url.QueryEscape(strings.TrimSpace(strings.TrimPrefix(a, "yt ")))
