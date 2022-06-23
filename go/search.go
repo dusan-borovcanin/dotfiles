@@ -16,7 +16,7 @@ const (
 )
 
 func main() {
-	if len(os.Args) != 2 {
+	if len(os.Args) != 2 || os.Args[1] == "" {
 		log.Fatalln("Invalid number of args")
 	}
 	args := os.Args[1:]
@@ -31,6 +31,8 @@ func main() {
 		c = openBrowser("https://github.com/mainflux")
 	case a == "mondo":
 		c = openBrowser("www.mondo.rs")
+	case a == "t":
+		c = openBrowser("https://translate.google.rs/?sl=sr\\&tl=en\\&op=translate")
 	case strings.HasPrefix(a, "t "):
 		q := url.URL{Path: strings.TrimSpace(strings.TrimPrefix(a, "t "))}
 		p := q.EscapedPath()
@@ -54,7 +56,7 @@ func main() {
 	}
 
 	if c == nil {
-		log.Fatal("Commnad does not exist!")
+		log.Fatal("Command does not exist!")
 	}
 	if err := c.Run(); err != nil {
 		log.Fatalf("An error ocurred: %s!", err)
