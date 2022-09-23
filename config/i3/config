@@ -7,13 +7,12 @@ new_window pixel
 # i3-gaps
 # Font for window titles.
 font pango: SauceCodePro Nerd Font Black 11
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # Default borders: 4px for all the windows; no borders for fullscreen
 smart_borders on
-default_border pixel 4
+default_border pixel 1
 default_floating_border pixel 4
 
 # Default gaps
@@ -255,8 +254,8 @@ assign [class="zoom"] $ws6
 for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
-for_window [instance="dropdown_*"] border pixel 1
 for_window [instance="dropdown_term"] border none
+for_window [class="^.*"] border pixel 1
 
 # Set dropdown terminal
 for_window [instance="dropdown_term"] resize set 620 780
