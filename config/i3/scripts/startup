@@ -18,6 +18,7 @@ $HOME/dotfiles/config/polybar/polybar2/launch.sh &
 $HOME/dotfiles/config/i3/scripts/bt.sh &
 code &
 brave &
+obsidian &
 #sleep 3
 #lines=$(less $file)
 #for line in $lines
