@@ -23,6 +23,8 @@ func main() {
 	a := args[0]
 	var c *exec.Cmd
 	switch {
+	case a == "cal":
+		c = openBrowser("https://calendar.google.com/calendar/u/0/r/custom/7/d")
 	case a == "wa":
 		c = openBrowser("https://web.whatsapp.com")
 	case a == "fb":
