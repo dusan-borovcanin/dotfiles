@@ -13,9 +13,9 @@ day=$(date '+%a')
 # Start Slack only on workdays.
 [ $day != "Sat" ] && [ $day != "Sun" ] && slack &
 
-feh --bg-scale $HOME/Downloads/wp2.png & # Set background &
-$HOME/dotfiles/config/polybar/polybar2/launch.sh &
-$HOME/dotfiles/config/i3/scripts/bt.sh &
+feh --bg-scale $HOME/Downloads/bg.jpg & # Set background &
+# $HOME/dotfiles/config/polybar/polybar2/launch.sh &
+$HOME/dotfiles/config/polybar/launch.sh &
 code &
 brave &
 obsidian &
