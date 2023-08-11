@@ -7,3 +7,7 @@ source ~/dotfiles/zsh/bindings.zsh
 source ~/dotfiles/zsh/history.zsh
 source ~/dotfiles/zsh/theme.zsh
 source ~/dotfiles/zsh/plugins.zsh
+
+# .zshrc
+autoload -U promptinit; promptinit
+prompt pure
