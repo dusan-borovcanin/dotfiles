@@ -1,5 +1,3 @@
-# stop default ^S
-stty stop undef
 # history navigation
 bindkey '^R' history-incremental-search-backward
 bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
