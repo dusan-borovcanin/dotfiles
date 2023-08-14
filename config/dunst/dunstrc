@@ -56,8 +56,6 @@
     sticky_history = yes
     history_length = 100
     # browser = /usr/bin/brave -new-tab
-    # dmenu = "dmenu_run -fn 'DejaVu Sans Mono Nerd Font:size=14' -nb '#004D40' -sb '#00897B' -i"
-
 
     # Always run rule-defined scripts, even if the notification is suppressed
     always_run_script = true
