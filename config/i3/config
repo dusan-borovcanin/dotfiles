@@ -38,7 +38,7 @@ gaps inner 10
 smart_gaps on
 
 # start a terminal
-bindsym $mod+Return exec alacritty -o font.size=7
+bindsym $mod+Return exec WINIT_X11_SCALE_FACTOR=1.0 alacritty -o font.size=12
 
 # activate display
 bindsym $mod+p exec xrandr --output eDP --mode 1920x1200
