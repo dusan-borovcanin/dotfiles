@@ -14,12 +14,12 @@ set $alert #A54242
 set $disabled #707880
 
 
-# Set some nice colors      border           background         text	        indicator           child_border
-client.focused              $background      $background        $primary        $primary            $primary
-client.unfocused            $background_alt  $background_alt    $secondary      $background_alt     $background_alt
-client.focused_inactive     $disabled        $disabled          $secondary      $background         $background_alt
-client.urgent               $alert           $alert             $foreground     $alert              $background_alt
-client.placeholder          $alert           $alert             $foreground     $alert              $background_alt
+# Set some nice colors      border           background         text	           indicator           child_border
+client.focused              $background      $background        $primary           $primary            $primary
+client.unfocused            $background_alt  $background_alt    $foreground        $background_alt     $background_alt
+client.focused_inactive     $disabled        $disabled          $secondary         $background         $background_alt
+client.urgent               $alert           $alert             $foreground        $alert              $background_alt
+client.placeholder          $alert           $alert             $foreground        $alert              $background_alt
 
 
 # i3-gaps
