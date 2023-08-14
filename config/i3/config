@@ -256,7 +256,6 @@ for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_term"] border none
-for_window [window_role="browser-*"] border pixel 1
 
 # Set dropdown terminal
 for_window [instance="dropdown_term"] resize set 620 780
@@ -266,7 +265,6 @@ for_window [instance="dropdown_term"] move position 1298 60
 
 ## Floating terminal
 bindsym $mod+u [instance="dropdown_term"] scratchpad show
-bindsym $mod+Shift+u exec alacritty -n dropdown_term -f "DejaVu Sans Mono Nerd Font:size=10" -A 1 &
 bindsym $mod+g exec --no-startup-id brave
 
 ## Move to and from scratchpad
@@ -274,9 +272,6 @@ bindsym $mod+Shift+m move scratchpad
 bindsym $mod+m scratchpad show
 
 # Startup
-# exec xrandr --output $monitor2 --mode 1920x1080 --left-of $monitor1 # Setup monitors
-# exec --no-startup-id feh --bg-scale $HOME/Downloads/wp2.png # Set background
-# exec --no-startup-id $HOME/dotfiles/config/polybar/launch.sh
 exec --no-startup-id dunst -config $HOME/dotfiles/config/dunst/dunstrc # Start notification daemon
 # exec --no-startup-id nm-applet # Applet for NetworkManager
 exec --no-startup-id $HOME/dotfiles/config/i3/scripts/startup # Startup programs
