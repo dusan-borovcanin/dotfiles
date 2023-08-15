@@ -50,7 +50,7 @@ bindsym $mod+Shift+p exec xrandr --output eDP --off
 bindsym $mod+shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono Nerd Font:size=15' -nb '$background' -sb '$primary' -i
+bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono Nerd Font:size=16' -nb '$background' -sb '$primary' -i
 bindsym $mod+Shift+d exec $HOME/dotfiles/config/i3/scripts/search.sh
 bindsym $mod+Shift+c exec dotfiles_search "cal"
 
@@ -264,7 +264,6 @@ for_window [instance="dropdown_term"] move position 1298 60
 # Scratchpad
 
 ## Floating terminal
-bindsym $mod+u [instance="dropdown_term"] scratchpad show
 bindsym $mod+g exec --no-startup-id brave
 
 ## Move to and from scratchpad
