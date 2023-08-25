@@ -270,13 +270,12 @@ bindsym $mod+g exec --no-startup-id brave > /dev/null
 ## Move to and from scratchpad
 bindsym $mod+Shift+m move scratchpad
 bindsym $mod+m scratchpad show
+bindsym $mod+Shift+s exec flameshot gui -r | xclip -selection clipboard -t image/png
+
 
 # Startup
 exec --no-startup-id dunst -config $HOME/dotfiles/config/dunst/dunstrc > /dev/null # Start notification daemon
-exec --no-startup-id $HOME/dotfiles/config/i3/scripts/startup # Startup programs
-
-## Add and remove to/from startup file
-bindsym $mod+Shift+a exec $HOME/dotfiles/config/i3/scripts/autoload
+exec --no-startup-id $HOME/dotfiles/config/i3/scripts/startup > /dev/null # Startup programs
 
 # Switch to urgent
 bindsym $mod+x [urgent=latest] focus
