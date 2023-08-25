@@ -143,7 +143,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t error -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # audio and screen shortcuts
-bindsym XF86MonBrightnessUp	exec --no-startup-id light -A 5
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
@@ -276,7 +276,7 @@ bindsym $mod+Shift+s exec flameshot gui -r | xclip -selection clipboard -t image
 
 # Startup
 exec --no-startup-id dunst -config $HOME/dotfiles/config/dunst/dunstrc > /dev/null # Start notification daemon
-exec --no-startup-id $HOME/dotfiles/config/i3/scripts/startup > /dev/null # Startup programs
+exec --no-startup-id $HOME/dotfiles/config/i3/scripts/startup.sh > /dev/null # Startup programs
 
 # Switch to urgent
 bindsym $mod+x [urgent=latest] focus
