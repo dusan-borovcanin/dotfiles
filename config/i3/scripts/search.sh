@@ -21,8 +21,6 @@ dotfiles_search $(rofi -dmenu -p "Search: " -theme-str '
     enabled: false;
   }
   #window {
-    location: north;
-    y-offset: 150;
     width: 600;
     border: 3px solid;
   }'
