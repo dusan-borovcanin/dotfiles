@@ -51,7 +51,7 @@ bindsym $mod+shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono Nerd Font:size=16' -nb '$background' -sb '$primary' -i
-bindsym $mod+d exec rofi -show drun -display-drun "Run"
+bindsym $mod+d exec rofi -show drun -show-icons -display-drun "Run"
 bindsym $mod+Shift+d exec $HOME/dotfiles/config/i3/scripts/search.sh
 
 # change focus

@@ -2,12 +2,10 @@ source $DOTFILES/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source <(kubectl completion zsh)
 
-#Autosuggestion color
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-#Theme settings
-export BULLETTRAIN_GO_PREFIX='\ue626'
-export BULLETTRAIN_GIT_COLORIZE_DIRTY=true
-export BULLETTRAIN_TIME_BG='black'
-export BULLETTRAIN_TIME_FG='white'
+
+# using ripgrep combined with preview
+# find-in-file - usage: fif <searchTerm>
+fif() {
+  if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
+}
