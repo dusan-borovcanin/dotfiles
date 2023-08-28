@@ -16,10 +16,11 @@ const (
 )
 
 func main() {
-	if len(os.Args) != 2 || os.Args[1] == "" {
+	if len(os.Args) < 3 || os.Args[1] == "" {
 		log.Fatalln("Invalid number of args")
 	}
-	args := os.Args[1:]
+
+	args := os.Args[1:] // strip the root command
 	a := args[0]
 	var c *exec.Cmd
 	switch {
@@ -34,13 +35,11 @@ func main() {
 	case a == "mondo":
 		c = openBrowser("www.mondo.rs")
 	case a == "t":
-		c = openBrowser("https://translate.google.rs/?sl=sr\\&tl=en\\&op=translate")
-	case strings.HasPrefix(a, "t "):
-		q := url.URL{Path: strings.TrimSpace(strings.TrimPrefix(a, "t "))}
+		q := url.URL{Path: strings.Join(args[1:], " ")}
 		p := q.EscapedPath()
 		c = openBrowser(fmt.Sprintf("https://translate.google.rs/?sl=sr\\&tl=en\\&text=%s\\&op=translate", p))
-	case strings.HasPrefix(a, "t! "):
-		q := url.URL{Path: strings.TrimSpace(strings.TrimPrefix(a, "t! "))}
+	case a == "t!":
+		q := url.URL{Path: strings.Join(args[1:], " ")}
 		p := q.EscapedPath()
 		c = openBrowser(fmt.Sprintf("https://translate.google.rs/?sl=en\\&tl=sr\\&text=%s\\&op=translate", p))
 	case a == "gmail", strings.HasPrefix(a, "gmail "):
