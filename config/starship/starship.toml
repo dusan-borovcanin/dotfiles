@@ -10,6 +10,8 @@ $line_break\
 $character"""
 
 right_format = "$time"
+command_timeout = 10_000
+scan_timeout = 1_000
 
 [directory]
 style = "blue"
