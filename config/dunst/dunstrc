@@ -15,6 +15,7 @@
     history = mod1+grave
     context = ctrl+shift+period
     origin = top-left
+    dmenu = rofi -dmenu -p dunst
     # Define a color for the separator.
     # possible values are:
     #  * auto: dunst tries to find a color fitting to the background;

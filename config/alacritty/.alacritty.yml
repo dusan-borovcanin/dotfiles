@@ -1,3 +1,9 @@
+font:
+  normal:
+    family:  Source Code Pro for Powerline
+    size: 12
+    antialiasing: true
+    autohint: true
 items:
   - colors:
       name: 3024 (dark)
