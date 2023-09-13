@@ -1,21 +1,21 @@
 #!/bin/bash
 
-option1="lock"
-option2="logout"
-option3="suspend"
-option4="hibernate"
-option5="reboot"
-option6="shutdown"
+option1="(l)lock"
+option2="(e)logout"
+option3="(s)suspend"
+option4="(h)hibernate"
+option5="(r)reboot"
+option6="(S)shutdown"
 
 options="$option1\n$option2\n$option3\n$option4\n$option5\n$option6"
 
 choice="$( echo -e "$options" | rofi -lines 7 -dmenu -p "Power: " -theme-str '
   #window {
     width: 700;
+    height: 200;
     border: 3px solid;
   }'
 )"
-echo $choice
 
 case $choice in
     $option1) i3exit lock;;

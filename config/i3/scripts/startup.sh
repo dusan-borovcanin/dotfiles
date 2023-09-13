@@ -20,7 +20,7 @@ day=$(date '+%a')
 [ $day != "Sat" ] && [ $day != "Sun" ] && slack > /dev/null &	
 
 feh --bg-scale $HOME/Downloads/bg.jpg & # Set background	
-code > /dev/null &	
+codium > /dev/null &
 brave > /dev/null &	
 #sleep 3	
 #lines=$(less $file)	
