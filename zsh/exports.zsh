@@ -21,3 +21,6 @@ export DOTFILES=$HOME/dotfiles
 
 export PATH=/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
+
+# Add Emacs tools
+export PATH=$HOME/.config/emacs/bin:$PATH

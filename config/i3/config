@@ -209,12 +209,12 @@ mode "move_workspace" {
 bindsym $mod+o mode "move_workspace"
 
 exec_always setxkbmap us,rs,rs -variant ,latin, -option grp:alt_shift_toggle
-bindsym $mod+Shift+c exec --no-startup-id code ~/.config/i3/config
+bindsym $mod+Shift+c exec --no-startup-id codium ~/.config/i3/config
 
 # Use Rofi clipboard manager
 exec --no-startup-id greenclip daemon > /dev/null
 # Start KDEConnect to connect to phone
-exec --no-startup-id usr/lib/kdeconnectd > /dev/null
+exec --no-startup-id /usr/lib/kdeconnectd > /dev/null
 bindsym $mod+c exec "rofi -modi \\"clipboard:greenclip print\\" -show clipboard -theme-str '#window {width: 700; border: 3px solid;}'"
 
 bindsym $mod+Shift+g mode "gaps_inner"
@@ -236,6 +236,8 @@ assign [class="Slack"] $ws1
 assign [class="code-oss"] $ws2
 assign [class="code"] $ws2
 assign [class="Code"] $ws2
+assign [class="vscodium"] $ws2
+assign [class="VSCodium"] $ws2
 assign [class="brave-browser"] $ws3
 assign [class="Brave-browser"] $ws3
 assign [class="obsidian"] $ws5
@@ -264,6 +266,7 @@ bindsym $mod+Shift+s exec flameshot gui -r | xclip -selection clipboard -t image
 
 
 # Startup
+exec -no-startup-id  $HOME/dotfiles/config/polybar/launch.sh > /dev/null # Start Polybar
 exec --no-startup-id dunst -config $HOME/dotfiles/config/dunst/dunstrc > /dev/null # Start notification daemon
 exec --no-startup-id $HOME/dotfiles/config/i3/scripts/startup.sh > /dev/null # Startup programs
 

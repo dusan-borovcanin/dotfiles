@@ -77,10 +77,10 @@ alias gmf='git merge --no-ff'
 alias gmt='git mergetool'
 
 # terminal
-alias terminal="st"
+alias terminal="alacritty"
 
-# terminal youtube
-alias yt="mpsyt"
+# code
+alias code=codium
 
 # list dir stack
 alias dh="dirs -v"

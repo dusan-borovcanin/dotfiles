@@ -1,7 +1,7 @@
 #!/bin/sh	
 
 # Autoload links file location.	
-#file=$HOME/dotfiles/config/i3/scripts/autoload.txt	
+#file=$HOME/dotfiles/config/i3/scripts/autoload.txt
 
 # Turn built-in monitor off if an external monitor(s) is connected.	
 count=$(xrandr | grep "DP-*. connected" | wc | awk '{print $1}')	
@@ -20,10 +20,8 @@ day=$(date '+%a')
 [ $day != "Sat" ] && [ $day != "Sun" ] && slack > /dev/null &	
 
 feh --bg-scale $HOME/Downloads/bg.jpg & # Set background	
-$HOME/dotfiles/config/polybar/launch.sh > /dev/null &	
 code > /dev/null &	
 brave > /dev/null &	
-obsidian > /dev/null &	
 #sleep 3	
 #lines=$(less $file)	
 #for line in $lines	
