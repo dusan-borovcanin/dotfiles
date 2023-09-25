@@ -12,7 +12,7 @@ options="$option1\n$option2\n$option3\n$option4\n$option5\n$option6"
 choice="$( echo -e "$options" | rofi -lines 7 -dmenu -p "Power: " -theme-str '
   #window {
     width: 700;
-    height: 200;
+    height: 230;
     border: 3px solid;
   }'
 )"

@@ -38,7 +38,9 @@ gaps inner 10
 smart_gaps on
 
 # start a terminal
-bindsym $mod+Return exec WINIT_X11_SCALE_FACTOR=1.0 alacritty -o font.size=12
+# bindsym $mod+Return exec WINIT_X11_SCALE_FACTOR=1.0 alacritty -o font.size=12
+bindsym $mod+Return exec st
+bindsym $mod+Shift+Return exec st -n "dropdown_term"
 
 # activate display
 bindsym $mod+p exec xrandr --output eDP --mode 1920x1200
@@ -180,7 +182,21 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bindsym $mod+Escape exec --no-startup-id $HOME/dotfiles/config/i3/scripts/system.sh
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+     bindsym l exec --no-startup-id i3exit lock, mode "default"
+     bindsym e exec --no-startup-id i3exit logout, mode "default"
+     bindsym s exec --no-startup-id i3exit suspend, mode "default"
+     bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+     bindsym r exec --no-startup-id i3exit reboot, mode "default"
+     bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+     # back to normal: Enter or Escape
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
+bindsym $mod+Escape mode "$mode_system"
+# bindsym $mod+Escape exec --no-startup-id $HOME/dotfiles/config/i3/scripts/system.sh
 
 set $monitor1 DP1
 set $monitor2 eDP1
@@ -208,8 +224,8 @@ mode "move_workspace" {
 # Workspace mode config
 bindsym $mod+o mode "move_workspace"
 
-exec_always setxkbmap us,rs,rs -variant ,latin, -option grp:alt_shift_toggle
-bindsym $mod+Shift+c exec --no-startup-id codium ~/.config/i3/config
+exec --no-startup-id setxkbmap us,rs,rs -variant ,latin, -option grp:alt_shift_toggle
+bindsym $mod+Shift+c exec --no-startup-id codium ~/dotfiles/config/i3/config
 
 # Use Rofi clipboard manager
 exec --no-startup-id greenclip daemon > /dev/null
@@ -247,13 +263,12 @@ assign [class="zoom"] $ws6
 
 # Dropdown window
 for_window [instance="dropdown_*"] floating enable
-for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_term"] border none
 
 # Set dropdown terminal
-for_window [instance="dropdown_term"] resize set 620 780
-for_window [instance="dropdown_term"] move position 1298 60
+for_window [instance="dropdown_term"] resize set 1800 1000
+for_window [instance="dropdown_term"] move position 1600 60
 
 # Scratchpad
 
@@ -263,36 +278,28 @@ bindsym $mod+g exec --no-startup-id brave > /dev/null
 bindsym $mod+Shift+m move scratchpad
 bindsym $mod+m scratchpad show
 bindsym $mod+Shift+s exec --no-startup-id flameshot gui -r | xclip -selection clipboard -t image/png
+for_window [class="fzf-menu"] floating enable
 
 # Startup
-exec --no-startup-id $HOME/dotfiles/config/polybar/launch.sh > /dev/null # Start Polybar
+exec --no-startup-id kbdd
+# exec --no-startup-id $HOME/dotfiles/config/polybar/launch.sh > /dev/null # Start Polybar
 exec --no-startup-id dunst -config $HOME/dotfiles/config/dunst/dunstrc > /dev/null # Start notification daemon
 exec --no-startup-id $HOME/dotfiles/config/i3/scripts/startup.sh > /dev/null # Startup programs
 
 # Switch to urgent
 bindsym $mod+x [urgent=latest] focus
 
-
-# bar {
-#     font pango: DejaVu Sans Mono, FontAwesome 12
-#     position bottom
-  #   status_command ~/go/src/github.com/lsgrep/gostatus/gostatus --config ~/go/src/github.com/lsgrep/gostatus.yml
-#    status_command i3status # /home/dusanb/go/src/github.com/dusanb94/bar/script
-#     colors {
-#         separator #666666
-#         background #222222
-#         statusline #dddddd
-#         focused_workspace #0088CC #0088CC #ffffff
-#         active_workspace #333333 #333333 #ffffff
-#         inactive_workspace #333333 #333333 #888888
-#         urgent_workspace #2f343a #900000 #ffffff
-#     }
-# }
-
-
-#bar {
-#      font pango: DejaVu Sans Mono Powerline 12
-#      position bottom
-        # status_command ~/go/src/github.com/lsgrep/gostatus/gostatus --config ~/go/src/github.com/lsgrep/gostatus/gostatus.yml
-# status_command /home/dusanb/go/src/github.com/dusanb94/bar/gobar
-#}
+bar {
+    font pango:DejaVu Sans Mono, FontAwesome 14
+    position top
+    status_command i3status-rs $HOME/dotfiles/config/i3/status.toml
+    colors {
+        # separator $primary
+        background $background
+        # statusline #dddddd
+        focused_workspace $background $background $primary
+        active_workspace  $background $background $primary
+        inactive_workspace $background_alt $background_alt $foreground
+        urgent_workspace $alert $alert $primary
+    }
+}
