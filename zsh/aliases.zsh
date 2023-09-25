@@ -76,6 +76,16 @@ alias gms='git merge --squash'
 alias gmf='git merge --no-ff'
 alias gmt='git mergetool'
 
+# -------------------------------------------------------------------
+# Docker
+# -------------------------------------------------------------------
+alias dps="docker ps"
+alias dl="docker logs"
+
+# -------------------------------------------------------------------
+# Other
+# -------------------------------------------------------------------
+
 # terminal
 alias terminal="alacritty"
 
@@ -84,3 +94,4 @@ alias code=codium
 
 # list dir stack
 alias dh="dirs -v"
+alias ls='ls --color=auto'
