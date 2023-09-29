@@ -10,24 +10,20 @@ icons = "material-nf"
 
 [[block]]
 block = "memory"
-format = " $icon $mem_used_percents.eng(w:1) "
+format = "$icon $mem_used_percents.eng(w:1)"
 
 [[block]]
 block = "cpu"
 interval = 5
 
 [[block]]
-block = "load"
-
-[[block]]
 block = "temperature"
 interval = 3
 chip = "thinkpad-isa-0000"
 inputs = ["CPU"]
-format = " $icon $min "
+format = "$icon $min"
 [block.theme_overrides]
 info_bg = { link = "idle_bg"}
-
 
 [[block]]
 block = "keyboard_layout"
@@ -36,13 +32,13 @@ format = " $layout "
 
 [[block]]
 block = "net"
-format = " $icon {$signal_strength $ssid} "
+format = "$icon  {$signal_strength $ssid}"
 
 [[block]]
 block = "battery"
 driver = "upower"
-format = " $icon $percentage "
-not_charging_format = " $icon $percentage "
+format = " $icon $percentage"
+not_charging_format = " $icon $percentage"
 [block.theme_overrides]
 good_bg = { link = "idle_bg"}
 good_fg = { link = "idle_fg"}
@@ -54,16 +50,16 @@ block = "backlight"
 block = "sound"
 headphones_indicator = true
 max_vol = 100
-format = " $icon {$volume.eng(w:2) |}"
+format = "$icon {$volume.eng(w:2)|}"
 
 [[block]]
 block = "time"
 interval = 5
-format = " $icon $timestamp.datetime(f:'%a %d. %b %R') "
+format = " $icon $timestamp.datetime(f:'%R %a %d. %b') "
 
 [[block]]
 block = "pomodoro"
-format = " $icon { $message |}"
+format = "$icon  {$message|}"
 notify_cmd = "notify-send '{msg}'"
 blocking_cmd = false
 

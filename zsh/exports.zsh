@@ -7,7 +7,9 @@ export EDITOR=vim
 export VISUAL=nvim
 
 export TERM=st-256color
-export MANPAGER="nvim +Man!"
+if [ "`type -p nvim`" ]; then
+    export MANPAGER="nvim +Man!"
+fi
 
 # dir stack size
 export DIRSTACKSIZE=7

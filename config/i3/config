@@ -22,9 +22,9 @@ client.urgent               $alert           $alert             $foreground     
 client.placeholder          $alert           $alert             $foreground        $alert              $background_alt
 
 
-# i3-gaps
 # Font for window titles.
-font pango: SauceCodePro Nerd Font Black 11
+font pango:DejaVu Sans Mono, FontAwesome 12
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -264,7 +264,6 @@ assign [class="zoom"] $ws6
 # Dropdown window
 for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] sticky enable
-for_window [instance="dropdown_term"] border none
 
 # Set dropdown terminal
 for_window [instance="dropdown_term"] resize set 1800 1000
