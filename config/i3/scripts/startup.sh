@@ -19,7 +19,7 @@ day=$(date '+%a')
 # Start Slack only on workdays.	
 [ $day != "Sat" ] && [ $day != "Sun" ] && slack > /dev/null &	
 
-feh --bg-scale $HOME/Downloads/bg.jpg & # Set background	
+feh --bg-scale $HOME/Downloads/bg2.jpg & # Set background
 codium > /dev/null &
 brave > /dev/null &	
 #sleep 3	

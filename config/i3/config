@@ -267,7 +267,7 @@ for_window [instance="dropdown_*"] sticky enable
 
 # Set dropdown terminal
 for_window [instance="dropdown_term"] resize set 1800 1000
-for_window [instance="dropdown_term"] move position 1600 60
+for_window [instance="dropdown_term"] move position 1635 55
 
 # Scratchpad
 
