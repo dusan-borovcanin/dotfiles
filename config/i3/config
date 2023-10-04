@@ -4,7 +4,6 @@ set $mod Mod4
 # Hide titlebar
 new_window pixel
 
-
 set $background #282A2E
 set $background_alt #373B41
 set $foreground #C5C8C6
@@ -13,6 +12,8 @@ set $secondary #8ABEB7
 set $alert #A54242
 set $disabled #707880
 
+# Path to dotfiles that holds the config
+set $dotfiles $HOME/dotfiles/config
 
 # Set some nice colors      border           background         text	           indicator           child_border
 client.focused              $background      $background        $primary           $primary            $primary
@@ -22,7 +23,7 @@ client.urgent               $alert           $alert             $foreground     
 client.placeholder          $alert           $alert             $foreground        $alert              $background_alt
 
 
-# Font for window titles.
+# Font for window titles
 font pango:DejaVu Sans Mono, FontAwesome 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -196,7 +197,7 @@ mode "$mode_system" {
      bindsym Escape mode "default"
 }
 bindsym $mod+Escape mode "$mode_system"
-# bindsym $mod+Escape exec --no-startup-id $HOME/dotfiles/config/i3/scripts/system.sh
+# bindsym $mod+Escape exec --no-startup-id $dtofiles/i3/scripts/system.sh
 
 set $monitor1 DP1
 set $monitor2 eDP1
@@ -225,7 +226,7 @@ mode "move_workspace" {
 bindsym $mod+o mode "move_workspace"
 
 exec --no-startup-id setxkbmap us,rs,rs -variant ,latin, -option grp:alt_shift_toggle
-bindsym $mod+Shift+c exec --no-startup-id codium ~/dotfiles/config/i3/config
+bindsym $mod+Shift+c exec --no-startup-id codium $dotfiles/i3/config
 
 # Use Rofi clipboard manager
 exec --no-startup-id greenclip daemon > /dev/null
@@ -281,9 +282,9 @@ for_window [class="fzf-menu"] floating enable
 
 # Startup
 exec --no-startup-id kbdd
-# exec --no-startup-id $HOME/dotfiles/config/polybar/launch.sh > /dev/null # Start Polybar
-exec --no-startup-id dunst -config $HOME/dotfiles/config/dunst/dunstrc > /dev/null # Start notification daemon
-exec --no-startup-id $HOME/dotfiles/config/i3/scripts/startup.sh > /dev/null # Startup programs
+# exec --no-startup-id $dotfiles/polybar/launch.sh > /dev/null # Start Polybar
+exec --no-startup-id dunst -config $dotfiles/dunst/dunstrc > /dev/null # Start notification daemon
+exec --no-startup-id $dotfiles/i3/scripts/startup.sh > /dev/null # Startup programs
 
 # Switch to urgent
 bindsym $mod+x [urgent=latest] focus
@@ -291,11 +292,9 @@ bindsym $mod+x [urgent=latest] focus
 bar {
     font pango:DejaVu Sans Mono, FontAwesome 14
     position top
-    status_command i3status-rs $HOME/dotfiles/config/i3/status.toml
+    status_command i3status-rs $dotfiles/i3/status.toml
     colors {
-        # separator $primary
         background $background
-        # statusline #dddddd
         focused_workspace $background $background $primary
         active_workspace  $background $background $primary
         inactive_workspace $background_alt $background_alt $foreground
