@@ -35,7 +35,7 @@ format = " $layout "
 
 [[block]]
 block = "net"
-format = "$icon  {$signal_strength $ssid}"
+format = "$icon {$signal_strength $ssid |Wired connection}"
 
 [[block]]
 block = "battery"
