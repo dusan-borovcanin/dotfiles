@@ -41,7 +41,7 @@ smart_gaps on
 # start a terminal
 # bindsym $mod+Return exec WINIT_X11_SCALE_FACTOR=1.0 alacritty -o font.size=12
 bindsym $mod+Return exec st
-bindsym $mod+Shift+Return exec st -n "dropdown_term"
+bindsym $mod+Shift+Return exec $dotfiles/i3/scripts/sticky_term.sh
 
 # activate display
 bindsym $mod+p exec xrandr --output eDP --mode 1920x1200
@@ -55,7 +55,7 @@ bindsym $mod+shift+q kill
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono Nerd Font:size=16' -nb '$background' -sb '$primary' -i
 bindsym $mod+d exec "rofi -show drun -show-icons -display-drun \\"Run\\" -theme-str '#window {width: 700; border: 3px solid;}'"
-bindsym $mod+Shift+d exec $HOME/dotfiles/config/i3/scripts/search.sh
+bindsym $mod+Shift+d exec $dotfiles/i3/scripts/search.sh
 
 # change focus
 bindsym $mod+j focus left
@@ -230,6 +230,10 @@ bindsym $mod+Shift+c exec --no-startup-id codium $dotfiles/i3/config
 
 # Use Rofi clipboard manager
 exec --no-startup-id greenclip daemon > /dev/null
+
+# Start picom composer for nicer transitions
+exec --no-startup-id  picom --daemon --config $dotfiles/picom/picom.conf
+
 # Start KDEConnect to connect to phone
 exec --no-startup-id /usr/lib/kdeconnectd > /dev/null
 bindsym $mod+c exec "rofi -modi \\"clipboard:greenclip print\\" -show clipboard -theme-str '#window {width: 700; border: 3px solid;}'"
@@ -263,12 +267,12 @@ assign [class="Postman"] $ws4
 assign [class="zoom"] $ws6
 
 # Dropdown window
-for_window [instance="dropdown_*"] floating enable
-for_window [instance="dropdown_*"] sticky enable
+for_window [instance="sticky_*"] floating enable
+for_window [instance="sticky_*"] sticky enable
 
 # Set dropdown terminal
-for_window [instance="dropdown_term"] resize set 1800 1000
-for_window [instance="dropdown_term"] move position 1635 55
+# for_window [instance="sticky_term"] resize set 1800 1000
+# for_window [instance="sticky_term"] move position 1635 55
 
 # Scratchpad
 

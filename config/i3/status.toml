@@ -7,6 +7,7 @@ separator = ""
 
 [icons]
 icons = "material-nf"
+
 [[block]]
 block = "cpu"
 interval = 5
@@ -21,7 +22,7 @@ format_alt = "$icon_swap $mem_total_used.eng(w:3,u:B,p:Mi)/($mem_total_used_perc
 
 [[block]]
 block = "temperature"
-interval = 3
+interval = 5
 chip = "thinkpad-isa-0000"
 inputs = ["CPU"]
 format = " $icon $min"
@@ -57,7 +58,7 @@ format = "$icon {$volume.eng(w:2)|}"
 
 [[block]]
 block = "time"
-interval = 5
+interval = 60
 format = " $icon $timestamp.datetime(f:'%R %a %d. %b') "
 
 [[block]]
