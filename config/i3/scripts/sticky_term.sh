@@ -4,7 +4,7 @@
 res=$(xrandr | grep '*' | awk '{ print $1 }')
 
 
-st -n "sticky_term" &
+st -n "sticky_term" -A 0.9 &
 # i3-msg -q exec "st -n 'sticky_term'"
 
 pid="$!"

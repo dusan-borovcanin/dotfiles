@@ -40,7 +40,7 @@ smart_gaps on
 
 # start a terminal
 # bindsym $mod+Return exec WINIT_X11_SCALE_FACTOR=1.0 alacritty -o font.size=12
-bindsym $mod+Return exec st -A 1
+bindsym $mod+Return exec st
 bindsym $mod+Shift+Return exec $dotfiles/i3/scripts/sticky_term.sh
 
 # activate display
