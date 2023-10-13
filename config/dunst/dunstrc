@@ -3,7 +3,7 @@
     follow = keyboard
     indicate_hidden = yes
     shrink = yes
-    transparency = 10
+    transparency = 0
     separator_height = 2
     padding = 1
     horizontal_padding = 8

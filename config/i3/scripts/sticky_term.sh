@@ -10,7 +10,7 @@ st -n "sticky_term" &
 pid="$!"
 
 # Wait for the window to open and grab its window ID
-sleep 0.3
+sleep 0.2
 size="1200 700"
 position="715 55"
 echo $res
