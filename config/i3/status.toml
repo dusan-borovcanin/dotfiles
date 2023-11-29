@@ -58,7 +58,7 @@ format = "$icon {$volume.eng(w:2)|}"
 
 [[block]]
 block = "time"
-interval = 60
+interval = 5
 format = " $icon $timestamp.datetime(f:'%R %a %d. %b') "
 
 [[block]]

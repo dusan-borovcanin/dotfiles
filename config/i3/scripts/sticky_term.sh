@@ -3,11 +3,9 @@
 # Determine display size to set position and size of sticky terminal.
 res=$(xrandr | grep '*' | awk '{ print $1 }')
 
-
+cd ~/go/src/github.com/absmach/magistrala
 st -n "sticky_term" -A 0.9 &
 # i3-msg -q exec "st -n 'sticky_term'"
-
-pid="$!"
 
 # Wait for the window to open and grab its window ID
 sleep 0.2
@@ -18,7 +16,7 @@ echo $res
 case $res in
   "1920x1080") position="1010 60" size="900 550" ;;
   "1920x1200") position="715 55" size="1200 700" ;;
-  "2560x1440") position="1115 60" size="800 500" ;;
+  "2560x1440") position="1250 45" size="1300 800" ;;
   "3440x1440") position="1635 55" size="1800 1000" ;;
 esac
 
