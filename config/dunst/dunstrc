@@ -9,7 +9,7 @@
     horizontal_padding = 8
     frame_width = 3
     frame_color = "#F0C674"
-    corner_radius = 10
+    corner_radius = 0
     close = ctrl+space
     close_all = ctrl+shift+space
     history = mod1+grave
