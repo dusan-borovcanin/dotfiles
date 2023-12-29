@@ -23,12 +23,14 @@ export LANG=en_US.UTF-8
 # Go environment
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
+export PATH=/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
+
+# Rust env
+export PATH=$PATH:$HOME/.cargo/bin
 
 # ZSH config
 export DOTFILES=$HOME/dotfiles
-
-export PATH=/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$PATH
-export PATH=$PATH:/usr/local/go/bin
 
 # Add Emacs tools
 export PATH=$HOME/.config/emacs/bin:$PATH
