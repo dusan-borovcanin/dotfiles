@@ -146,8 +146,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t error -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # audio and screen shortcuts
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
+bindsym XF86MonBrightnessUp exec --no-startup-id echo $(($(cat /sys/class/backlight/amdgpu_bl1/brightness) + 12)) > /sys/class/backlight/amdgpu_bl1/brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id echo $(($(cat /sys/class/backlight/amdgpu_bl1/brightness) - 12)) > /sys/class/backlight/amdgpu_bl1/brightness
 
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease sound volume
@@ -270,6 +270,7 @@ assign [class="zoom"] $ws6
 # Dropdown window
 for_window [instance="sticky_*"] floating enable
 for_window [instance="sticky_*"] sticky enable
+for_window [title="Meet*"] sticky enable
 
 # Set dropdown terminal
 # for_window [instance="sticky_term"] resize set 1800 1000
