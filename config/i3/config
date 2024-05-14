@@ -44,13 +44,15 @@ bindsym $mod+Return exec st
 bindsym $mod+Shift+Return exec $dotfiles/i3/scripts/sticky_term.sh
 
 set $monitor1 eDP
-set $monitor2 DP1
+set $monitor2 DisplayPort-0
 
 # activate display
-bindsym $mod+p exec xrandr --output $monitor1 --mode 1920x1200
+bindsym $mod+p exec xrandr --output $monitor1 --auto
+bindsym $mod+ctrl+p exec xrandr --output $monitor2 --auto
 
 # deactivate display
 bindsym $mod+Shift+p exec xrandr --output $monitor1 --off
+bindsym $mod+ctrl+Shift+p exec xrandr --output $monitor2 --off
 
 # kill focused window
 bindsym $mod+shift+q kill
