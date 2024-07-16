@@ -14,6 +14,8 @@ source ~/dotfiles/zsh/bindings.zsh
 source ~/dotfiles/zsh/history.zsh
 source ~/dotfiles/zsh/plugins.zsh
 
+zstyle ':completion:*'  list-colors '=*=32'
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
