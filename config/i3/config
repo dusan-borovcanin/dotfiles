@@ -59,7 +59,7 @@ bindsym $mod+shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono Nerd Font:size=16' -nb '$background' -sb '$primary' -i
-bindsym $mod+d exec "rofi -show drun -show-icons -display-drun \\"Run\\" -theme-str '#window {width: 700; border: 3px solid;}'"
+bindsym $mod+d exec "rofi -show drun -show-icons -display-drun \\"Run\\" -theme-str '#window {width: 700; border: 3px solid;}' -terminal 'st'"
 bindsym $mod+Shift+d exec $dotfiles/i3/scripts/search.sh
 
 # change focus
@@ -227,7 +227,7 @@ mode "move_workspace" {
 # Workspace mode config
 bindsym $mod+o mode "move_workspace"
 
-exec --no-startup-id setxkbmap us,rs,rs -variant ,latin, -option grp:alt_shift_toggle
+exec --no-startup-id setxkbmap -option grp:alt_shift_toggle,grp_led:scroll -layout us,rs,rs -variant ,latin,
 bindsym $mod+Shift+c exec --no-startup-id codium $dotfiles
 
 # Use Rofi clipboard manager
