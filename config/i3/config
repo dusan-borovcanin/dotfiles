@@ -12,6 +12,14 @@ set $secondary #8ABEB7
 set $alert #A54242
 set $disabled #707880
 
+# Set GTK theme
+set $GTK_THEME Adwaita
+
+exec --no-startup-id export GTK_THEME=$GTK_THEME
+exec --no-startup-id export GTK2_RC_FILES=$HOME/.gtkrc-2.0
+exec --no-startup-id export GTK3_MODULES=$HOME/.config/gtk-3.0/settings.ini
+
+
 # Path to dotfiles that holds the config
 set $dotfiles $HOME/dotfiles/config
 
@@ -55,7 +63,7 @@ bindsym $mod+Shift+p exec xrandr --output $monitor1 --off
 bindsym $mod+ctrl+Shift+p exec xrandr --output $monitor2 --off
 
 # kill focused window
-bindsym $mod+shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono Nerd Font:size=16' -nb '$background' -sb '$primary' -i
