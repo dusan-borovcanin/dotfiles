@@ -7,6 +7,7 @@ export EDITOR=vim
 export VISUAL=nvim
 
 export TERM=st-256color
+export TERMINAL=st-256color
 if [ "`type -p nvim`" ]; then
     export MANPAGER="nvim +Man!"
 fi
