@@ -21,7 +21,7 @@ day=$(date '+%a')
 
 feh --bg-scale $HOME/Downloads/bg2.jpg & # Set background
 codium > /dev/null &
-brave > /dev/null &	
+brave > /dev/null &
 #sleep 3	
 #lines=$(less $file)	
 #for line in $lines	

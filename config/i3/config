@@ -63,7 +63,7 @@ bindsym $mod+Shift+p exec xrandr --output $monitor1 --off
 bindsym $mod+ctrl+Shift+p exec xrandr --output $monitor2 --off
 
 # kill focused window
-bindsym $mod+q kill
+bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono Nerd Font:size=16' -nb '$background' -sb '$primary' -i
@@ -272,8 +272,8 @@ assign [class="vscodium"] $ws2
 assign [class="VSCodium"] $ws2
 assign [class="brave-browser"] $ws3
 assign [class="Brave-browser"] $ws3
-assign [class="obsidian"] $ws5
-assign [class="Obsidian"] $ws5
+assign [class="Mail"] $ws6
+assign [class="thunderbird"] $ws6
 assign [class="Postman"] $ws4
 assign [class="zoom"] $ws6
 
