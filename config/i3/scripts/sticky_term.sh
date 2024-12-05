@@ -3,7 +3,7 @@
 # Determine display size to set position and size of sticky terminal.
 res=$(xrandr | grep '*' | awk '{ print $1 }')
 
-cd ~/go/src/github.com/absmach/magistrala
+cd ~/go/src/github.com/absmach/supermq
 st -n "sticky_term" -A 0.9 &
 # i3-msg -q exec "st -n 'sticky_term'"
 
